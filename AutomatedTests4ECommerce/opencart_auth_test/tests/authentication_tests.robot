@@ -1,19 +1,27 @@
 *** Settings ***
 Library    SeleniumLibrary
+Test Teardown    Close Browser
 
 *** Variables ***
-${OPEN_CART_URL}    https://demo.opencart.com/en-gb?route=account/login
+${OPEN_CART_URL}    https://demo-opencart.com/index.php?route=account/login&language=en-gb
 ${USERNAME}         tonttu123@gmail.com
 ${PASSWORD}         Toljanteri99
+${BROWSER}          firefox
 
 *** Test Cases ***
 Valid User Can Login
-    Open Browser    ${OPEN_CART_URL}    firefox
-    Wait Until Element Is Visible    name=email    10s
+    Open Browser    ${OPEN_CART_URL}    ${BROWSER}
+    Wait Until Element Is Visible    name=email    
     Input Text    name=email    ${USERNAME}
-    Wait Until Element Is Visible    name=password    10s
+    Wait Until Element Is Visible    name=password   
     Input Text    name=password    ${PASSWORD}
-    # Use the correct selector for the login button
     Click Button    css=button.btn.btn-primary
-    Wait Until Element Is Visible    xpath=/html/body/main/div[2]/div/aside/div/a[13]
+    # Wait until 'My Account' is visible on the page
+    Wait Until Element Is Visible    xpath=/html/body/main/div[2]/div/div/h2[1]
+    # Click 'Logout' link 
+    Click Link    xpath=/html/body/main/div[2]/div/aside/div/a[13]
+    # Wait until logout is executed and then click 'Continue'
+    Wait until Element Is Visible   xpath=/html/body/main/div[2]/div/div/div/a
+    Click Link    xpath=/html/body/main/div[2]/div/div/div/a
     Close Browser
+    
