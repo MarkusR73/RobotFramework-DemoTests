@@ -25,3 +25,13 @@ Valid User Can Login
     Click Link    xpath=/html/body/main/div[2]/div/div/div/a
     Close Browser
     
+Invalid User Cannot Login
+    Open Browser    ${OPEN_CART_URL}    ${BROWSER}
+    Wait Until Element Is Visible    name=email
+    Input Text    name=email    invalid@example.com
+    Wait Until Element Is Visible    name=password
+    Input Text    name=password    wrongpassword
+    Click Button    css=button.btn.btn-primary
+    # Check if the error message pops up
+    Wait Until Element Is Visible    css=html body div#alert.toast-container.position-fixed.top-0.end-0.p-3
+    Close Browser
