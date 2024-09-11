@@ -25,7 +25,7 @@ Valid User Can Login
     Click Link    xpath=/html/body/main/div[2]/div/div/div/a
     Close Browser
     
-Invalid User Cannot Login
+Invalid User Can't Login
     Open Browser    ${OPEN_CART_URL}    ${BROWSER}
     Wait Until Element Is Visible    name=email
     Input Text    name=email    invalid@example.com
