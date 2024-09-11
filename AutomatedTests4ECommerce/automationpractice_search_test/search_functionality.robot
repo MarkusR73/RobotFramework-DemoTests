@@ -3,7 +3,7 @@ Library    SeleniumLibrary
 Test Teardown    Close Browser
 
 *** Variables ***
-${OPEN_CART_URL}                    http://www.automationpractice.pl/index.php
+${URL}                    http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
 # Locators for search box, search button, and result count
@@ -17,7 +17,7 @@ ${SEARCH_TERM}                      dress
 
 *** Test Cases ***
 Search For A Product
-    Open Browser    ${OPEN_CART_URL}    ${BROWSER}
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Wait until Element Is Visible   ${SEARCH_BOX}
 
