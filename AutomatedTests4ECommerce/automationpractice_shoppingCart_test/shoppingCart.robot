@@ -1,12 +1,15 @@
 *** Settings ***
 Library     SeleniumLibrary
-Suite Setup    Open Browser And Go To URL
-Suite Teardown    Close Browser
+Suite Setup         Open Browser And Go To URL
+Suite Teardown      Close Browser
+Library             RandomRegistration.py
 
 *** Variables ***
 ${URL}                              http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
+${Sign_In_Button}                   xpath=/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a
+${Create_An_Account}                xpath=//*[@id="SubmitCreate"]/span
 ${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
 ${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
 ${Color_Dress}                      xpath=//*[@id="color_8"]
@@ -23,7 +26,61 @@ ${Delete_Dress}                     xpath=//*[@id="6_40_0_0"]/i
 ${Checkout_Button}                  xpath=//*[@id="center_column"]/p[2]/a[1]/span
 
 *** Test Cases ***
+Randomized registration 
+    Go To   ${URL}
+    Maximize Browser Window
+
+    # Wait until the sign-in button is visible and click it
+    Wait Until Element Is Visible   ${Sign_In_Button}
+    Click Element   ${Sign_In_Button}
+
+    # Wait until the "Create An Account" element is visible
+    Wait Until Element Is Visible   ${Create_An_Account}
+
+    # Generate a random email and input it into the email field
+    ${random_email}=    Generate Random Email
+    Input Text  xpath=//*[@id="email_create"]   ${random_email}
+    Click Element   ${Create_An_Account}
+
+    # Wait until personal information form is visible
+    Wait Until Element Is Visible   xpath=/html/body/div/div[2]/div/div[3]/div/div/form/div[1]/h3
+
+    # Select gender
+    Click Element   id=id_gender1
+    
+    # Verify that the gender button is selected
+    ${checked}=    Get Element Attribute    id=id_gender1    checked
+    Should Be Equal As Strings    ${checked}    true
+
+    # Python calls to generate random Firstname, Lastname and password, then input them into the form
+    ${First_Name}=  Generate Random String
+    ${Last_Name}=  Generate Random String
+    ${Password}=    Generate Random String
+    Input Text  id=customer_firstname   ${First_Name}
+    Input Text  id=customer_lastname    ${Last_Name}
+    Input Text  id=passwd    ${Password}
+
+    # Select date of birth
+    Select From List By Value    id=days    1
+    Select From List By Value    id=months    1
+    Select From List By Value    id=years    2000
+    
+    # Verify the selected values
+    ${selected_value}=    Get Selected List Value    id=days
+    Should Be Equal As Strings    ${selected_value}    1
+    ${selected_value}=    Get Selected List Value    id=months
+    Should Be Equal As Strings    ${selected_value}    1
+    ${selected_value}=    Get Selected List Value    id=years
+    Should Be Equal As Strings    ${selected_value}    2000
+
+    # Complete registration by clicking the submit button
+    Click Element   id=submitAccount
+
+    # Wait until the success message is visible
+    Wait Until Element Is Visible   xpath=//*[@id="center_column"]/p[1]
+
 Add Dress To Cart
+    Go To    ${URL}
     Maximize Browser Window
 
     # Wait until page fully loaded
@@ -86,7 +143,19 @@ Remove from Cart
     # Wait until the dress is removed from the cart
     Wait Until Element Is Not Visible   xpath=//a[contains(@href, 'id_product=6')]
 
-    Close Browser
+    #Close Browser
+
+Verify Total Price
+    # Wait for the total price element to be visible
+    Wait Until Element Is Visible    id=total_price
+
+    # Get the text inside the total price span
+    ${total_price}=    Get Text    id=total_price
+
+    # Verify the total price value
+    Should Be Equal    ${total_price}    $34
+
+ 
 
 
 
