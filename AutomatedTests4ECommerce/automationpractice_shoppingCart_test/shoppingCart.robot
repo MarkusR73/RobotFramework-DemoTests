@@ -17,6 +17,10 @@ ${ADD_TO_CART_BUTTON}               xpath=//span[text()='Add to cart']
 ${CONTINUE_SHOPPING_BUTTON}         xpath=//span[text()[contains(., "Continue shopping")]] 
 ${HOME_ICON}                        xpath=//i[contains(@class, 'icon-home')]
 ${Product_Count}                    css=div.product-count
+${Cart_Link}                        xpath=//b[text()='Cart']
+${Summary_Text}                     xpath=//*[@id="cart_title"]
+${Delete_Dress}                     xpath=//*[@id="6_40_0_0"]/i
+${Checkout_Button}                  xpath=//*[@id="center_column"]/p[2]/a[1]/span
 
 *** Test Cases ***
 Add Dress To Cart
@@ -66,6 +70,22 @@ Add Blouse To Cart
     Wait Until Element Is Visible   ${HOME_ICON}
     Click Element   ${HOME_ICON}
 
+    #Close Browser
+
+Remove from Cart
+    Go To    ${URL}
+
+    # Wait until the shopping cart icon is visible, then enter the cart
+    Wait Until Element Is Visible   ${Cart_Link}
+    Click Element   ${Cart_Link}
+
+    # Wait until the "summary" text is visible, then remove the dress from the cart
+    Wait Until Element Is Visible   ${Summary_Text}
+    Click Or Scroll     ${Delete_Dress}
+    
+    # Wait until the dress is removed from the cart
+    Wait Until Element Is Not Visible   xpath=//a[contains(@href, 'id_product=6')]
+
     Close Browser
 
 
@@ -74,12 +94,14 @@ Add Blouse To Cart
 Open Browser And Go To URL
     Open Browser    ${URL}    ${BROWSER}
 
+# Try to click the desired element. If not clickable, scroll and try again
 Click Or Scroll
     [Arguments]    ${locator}
     ${is_clickable}=    Run Keyword And Return Status    Click Element    ${locator}
     # Only if the initial click attempt fails, start scrolling and retrying
     Run Keyword If    not ${is_clickable}    Scroll And Click Element    ${locator}
 
+#Scroll down and try to click desired element
 Scroll And Click Element
     [Arguments]    ${locator}
     FOR    ${index}    IN RANGE    0    10
