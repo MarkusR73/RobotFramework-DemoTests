@@ -11,7 +11,7 @@ ${BROWSER}                          firefox
 ${Sign_In_Button}                   xpath=/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a
 ${Create_An_Account}                xpath=//*[@id="SubmitCreate"]/span
 ${Lock_Icon}                        xpath=//*[@id="SubmitLogin"]/span
-${Sign_Out}                         xpath=//a[text()="Sign out"]
+${Sign_Out_Button}                  xpath=//a[text()="Sign out"]
 ${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
 ${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
 ${Color_Dress}                      xpath=//*[@id="color_8"]
@@ -92,7 +92,7 @@ Registration
     Wait Until Element Is Visible   xpath=//*[@id="center_column"]/p[1]
 
     # Sign out
-    Click Element   ${Sign_Out}
+    Click Element   ${Sign_Out_Button}
 
     # Wait until sign out process fully executed
     Wait Until Element Is Visible   ${Create_An_Account}
@@ -118,7 +118,7 @@ Valid login
     Wait Until element Is Visible   xpath=//*[@id="center_column"]/h1
 
     #Sign out
-    Click Element   ${Sign_Out}
+    Click Element   ${Sign_Out_Button}
 
     # Wait until sign out process Complete
     Wait Until Element Is Visible   ${Create_An_Account}
@@ -143,10 +143,26 @@ Invalid login
     # Wait until error message is visible
     Wait Until element Is Visible   xpath=//*[@id="center_column"]/div[1]/p
 
+    close browser
 
+*** Test Cases ***
 Add Dress To Cart
-    Go To    ${URL}
+    Open Browser And Go To URL
     Maximize Browser Window
+
+    # Wait until page fully loaded
+    Wait Until Element Is Visible   ${Sign_In_Button}
+    Click Element   ${Sign_In_Button}
+    
+    # wait until lock button is visible, fill login infos and login
+    Wait Until Element Is Visible   ${Lock_Icon}
+    Input Text  id=email    ${Random_Email}
+    Input Text  id=passwd   ${Password}
+    Click Element   ${Lock_Icon}
+
+    # Wait until "my account" header is visible
+    Wait Until element Is Visible   xpath=//*[@id="center_column"]/h1
+    Click Element   ${HOME_ICON}
 
     # Wait until page fully loaded
     Wait Until Element Is Visible   ${Dresses_Link}
@@ -167,11 +183,8 @@ Add Dress To Cart
     
     Wait Until Element Is Visible   ${HOME_ICON}
     Click Element   ${HOME_ICON}
-    
-    #Close Browser
 
 Add Blouse To Cart
-    Go To    ${URL}
     Wait Until Element Is Visible   ${WOMEN_Link}
     Click Element   ${WOMEN_Link}
 
@@ -192,23 +205,18 @@ Add Blouse To Cart
     Wait Until Element Is Visible   ${HOME_ICON}
     Click Element   ${HOME_ICON}
 
-    #Close Browser
-
 Remove from Cart
-    Go To    ${URL}
-
     # Wait until the shopping cart icon is visible, then enter the cart
     Wait Until Element Is Visible   ${Cart_Link}
     Click Element   ${Cart_Link}
 
-    # Wait until the "summary" text is visible, then remove the dress from the cart
+    # Wait until the page is fully loaded, then remove the dress from the cart
     Wait Until Element Is Visible   ${Summary_Text}
+    Wait Until Element Is Visible   ${Delete_Dress}
     Click Or Scroll     ${Delete_Dress}
     
     # Wait until the dress is removed from the cart
     Wait Until Element Is Not Visible   xpath=//a[contains(@href, 'id_product=6')]
-
-    #Close Browser
 
 Verify Total Price
     # Wait for the total price element to be visible
@@ -219,6 +227,8 @@ Verify Total Price
 
     # Verify the total price value
     Should Be Equal    ${total_price}    $34
+
+    close browser
 
 
 *** Keywords ***
