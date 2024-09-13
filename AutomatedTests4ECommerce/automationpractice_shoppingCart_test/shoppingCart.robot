@@ -10,6 +10,7 @@ ${BROWSER}                          firefox
 
 ${Sign_In_Button}                   xpath=/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a
 ${Create_An_Account}                xpath=//*[@id="SubmitCreate"]/span
+${Lock_Icon}                        xpath=//*[@id="SubmitLogin"]/span
 ${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
 ${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
 ${Color_Dress}                      xpath=//*[@id="color_8"]
@@ -26,7 +27,21 @@ ${Delete_Dress}                     xpath=//*[@id="6_40_0_0"]/i
 ${Checkout_Button}                  xpath=//*[@id="center_column"]/p[2]/a[1]/span
 
 *** Test Cases ***
-Randomized registration 
+Generate user info
+    # Generate a random email
+    ${Random_Email}=    Generate Random Email
+    Set Global Variable     ${Random_Email}
+
+    # Generate firstname, lastname and password
+    ${First_Name}=  Generate Random String
+    Set Global Variable     ${First_Name}
+    ${Last_Name}=  Generate Random String
+    Set Global Variable     ${Last_Name}
+    ${Password}=    Generate Random String
+    Set Global Variable     ${Password}
+
+*** Test Cases ***
+Registration 
     Go To   ${URL}
     Maximize Browser Window
 
@@ -37,9 +52,8 @@ Randomized registration
     # Wait until the "Create An Account" element is visible
     Wait Until Element Is Visible   ${Create_An_Account}
 
-    # Generate a random email and input it into the email field
-    ${random_email}=    Generate Random Email
-    Input Text  xpath=//*[@id="email_create"]   ${random_email}
+    # Input email and click crate account button
+    Input Text  xpath=//*[@id="email_create"]   ${Random_Email}
     Click Element   ${Create_An_Account}
 
     # Wait until personal information form is visible
@@ -52,10 +66,7 @@ Randomized registration
     ${checked}=    Get Element Attribute    id=id_gender1    checked
     Should Be Equal As Strings    ${checked}    true
 
-    # Python calls to generate random Firstname, Lastname and password, then input them into the form
-    ${First_Name}=  Generate Random String
-    ${Last_Name}=  Generate Random String
-    ${Password}=    Generate Random String
+    # Input user info into the form
     Input Text  id=customer_firstname   ${First_Name}
     Input Text  id=customer_lastname    ${Last_Name}
     Input Text  id=passwd    ${Password}
@@ -78,6 +89,14 @@ Randomized registration
 
     # Wait until the success message is visible
     Wait Until Element Is Visible   xpath=//*[@id="center_column"]/p[1]
+
+    # Sign out
+    Click Element   xpath://a[text()="Sign out"]
+
+    # Wait until sign out process fully executed
+    Wait Until Element Is Visible   ${Create_An_Account}
+
+    #close browser
 
 Add Dress To Cart
     Go To    ${URL}
@@ -154,9 +173,6 @@ Verify Total Price
 
     # Verify the total price value
     Should Be Equal    ${total_price}    $34
-
- 
-
 
 
 *** Keywords ***
