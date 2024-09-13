@@ -123,6 +123,26 @@ Valid login
     # Wait until sign out process Complete
     Wait Until Element Is Visible   ${Create_An_Account}
 
+    close browser
+
+*** Test Cases ***
+Invalid login
+    Open Browser And Go To URL
+    Maximize Browser Window
+
+    # Wait until page fully loaded
+    Wait Until Element Is Visible   ${Sign_In_Button}
+    Click Element   ${Sign_In_Button}
+    
+    # wait until lock button is visible, fill login infos and login
+    Wait Until Element Is Visible   ${Lock_Icon}
+    Input Text  id=email    ${Random_Email}
+    Input Text  id=passwd   wrongpasswd
+    Click Element   ${Lock_Icon}
+
+    # Wait until error message is visible
+    Wait Until element Is Visible   xpath=//*[@id="center_column"]/div[1]/p
+
 
 Add Dress To Cart
     Go To    ${URL}
