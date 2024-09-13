@@ -11,6 +11,7 @@ ${BROWSER}                          firefox
 ${Sign_In_Button}                   xpath=/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a
 ${Create_An_Account}                xpath=//*[@id="SubmitCreate"]/span
 ${Lock_Icon}                        xpath=//*[@id="SubmitLogin"]/span
+${Sign_Out}                         xpath=//a[text()="Sign out"]
 ${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
 ${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
 ${Color_Dress}                      xpath=//*[@id="color_8"]
@@ -91,12 +92,37 @@ Registration
     Wait Until Element Is Visible   xpath=//*[@id="center_column"]/p[1]
 
     # Sign out
-    Click Element   xpath://a[text()="Sign out"]
+    Click Element   ${Sign_Out}
 
     # Wait until sign out process fully executed
     Wait Until Element Is Visible   ${Create_An_Account}
 
-    #close browser
+    close browser
+
+*** Test Cases ***
+Valid login
+    Open Browser And Go To URL
+    Maximize Browser Window
+
+    # Wait until page fully loaded
+    Wait Until Element Is Visible   ${Sign_In_Button}
+    Click Element   ${Sign_In_Button}
+    
+    # wait until lock button is visible, fill login infos and login
+    Wait Until Element Is Visible   ${Lock_Icon}
+    Input Text  id=email    ${Random_Email}
+    Input Text  id=passwd   ${Password}
+    Click Element   ${Lock_Icon}
+
+    # Wait until "my account" header is visible
+    Wait Until element Is Visible   xpath=//*[@id="center_column"]/h1
+
+    #Sign out
+    Click Element   ${Sign_Out}
+
+    # Wait until sign out process Complete
+    Wait Until Element Is Visible   ${Create_An_Account}
+
 
 Add Dress To Cart
     Go To    ${URL}
