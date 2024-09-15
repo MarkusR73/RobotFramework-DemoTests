@@ -215,8 +215,9 @@ Remove from Cart
     Wait Until Element Is Visible   ${Delete_Dress}
     Click Or Scroll     ${Delete_Dress}
     
-    # Wait until the dress is removed from the cart
+    # Wait until the dress is removed from the cart and verify
     Wait Until Element Is Not Visible   xpath=//a[contains(@href, 'id_product=6')]
+    Wait Until Expected Value Is Visible    1 product   id=summary_products_quantity
 
 Verify Total Price
     # Wait for the total price element to be visible
@@ -227,8 +228,6 @@ Verify Total Price
 
     # Verify the total price value
     Should Be Equal    ${total_price}    $34
-
-    close browser
 
 
 *** Keywords ***
@@ -250,4 +249,12 @@ Scroll And Click Element
         Sleep    0.5s
         ${is_clickable}=    Run Keyword And Return Status    Click Element    ${locator}
         Exit For Loop If    ${is_clickable}
+    END
+
+Wait Until Expected Value Is Visible
+    [Arguments]  ${expected_value}  ${locator}
+    FOR  ${index}  IN RANGE  0  10
+        ${current_value}=  Get Text   ${locator}
+        Run Keyword If  '${current_value}' == '${expected_value}'  Exit For Loop
+        Sleep  1s
     END
