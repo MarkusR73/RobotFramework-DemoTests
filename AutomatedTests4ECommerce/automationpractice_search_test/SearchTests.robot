@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    SearchResources.robot
+#Resource    SearchResources.robot
 Resource    SearchKeywords.robot
 Library    SeleniumLibrary
 Test Teardown    Close Browser
@@ -40,15 +40,3 @@ Search For A Product
     Should Be Equal As Numbers    ${number_of_results}    ${EXPECTED_RESULT_COUNT}
 
     Close Browser
-
-*** Keywords ***
-Input Text Letter By Letter
-    [Arguments]    ${locator}    ${text}
-    # Convert the SEARCH_TERM into a list of individual characters
-    ${chars}=    Evaluate    list('${text}')
-
-    # Type each character one by one and add a small delay after each one
-    FOR    ${char}    IN    @{chars}
-        Press Keys    ${locator}    ${char}
-        Sleep    0.1s    
-    END
