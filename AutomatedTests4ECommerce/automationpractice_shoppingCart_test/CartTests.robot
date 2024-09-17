@@ -13,10 +13,10 @@ Generate user info
     Set Global Variable     ${Random_Email}
 
     # Generate firstname, lastname and password
-    ${First_Name}=  Generate Random String
-    Set Global Variable     ${First_Name}
-    ${Last_Name}=  Generate Random String
-    Set Global Variable     ${Last_Name}
+    ${Firstname}=  Generate Random String
+    Set Global Variable     ${Firstname}
+    ${Lastname}=  Generate Random String
+    Set Global Variable     ${Lastname}
     ${Password}=    Generate Random String
     Set Global Variable     ${Password}
 
@@ -26,55 +26,55 @@ Registration
     Maximize Browser Window
 
     # Wait until the sign-in button is visible and click it
-    Wait Until Element Is Visible   ${Sign_In_Button}
-    Click Element   ${Sign_In_Button}
+    Wait Until Element Is Visible   ${SIGN_IN_BUTTON} 
+    Click Element   ${SIGN_IN_BUTTON} 
 
-    # Wait until the "Create An Account" element is visible
-    Wait Until Element Is Visible   ${Create_An_Account}
+    # Wait until the "Create An Account" element appears on page
+    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
-    # Input email and click crate account button
-    Input Text  xpath=//*[@id="email_create"]   ${Random_Email}
-    Click Element   ${Create_An_Account}
+    # Input email and click create account button
+    Input Text  ${CREATE_EMAIL_FIELD}   ${Random_Email}
+    Click Button   ${CREATE_AN_ACCOUNT_BUTTON}
 
     # Wait until personal information form is visible
-    Wait Until Element Is Visible   xpath=/html/body/div/div[2]/div/div[3]/div/div/form/div[1]/h3
+    Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
 
     # Select gender
-    Click Element   id=id_gender1
+    Click Element   ${GENDER_SELECTOR_MR}
     
-    # Verify that the gender button is selected
-    ${checked}=    Get Element Attribute    id=id_gender1    checked
-    Should Be Equal As Strings    ${checked}    true
+    # Verify that 'MR' is selected
+    ${Gender_Selector_Value}=    Get Element Attribute    ${GENDER_SELECTOR_MR}     checked
+    Should Be Equal As Strings    ${Gender_Selector_Value}    true
 
     # Input user info into the form
-    Input Text  id=customer_firstname   ${First_Name}
-    Input Text  id=customer_lastname    ${Last_Name}
-    Input Text  id=passwd    ${Password}
+    Input Text  ${FIRSTNAME_FIELD}      ${Firstname}
+    Input Text  ${LASTNAME_FIELD}       ${Lastname}
+    Input Text  ${PASSWORD_FIELD}       ${Password}
 
     # Select date of birth
-    Select From List By Value    id=days    1
-    Select From List By Value    id=months    1
-    Select From List By Value    id=years    2000
+    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${BIRTHDAY}
+    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${BIRTH_MONTH}
+    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${BIRTH_YEAR}
     
     # Verify the selected values
-    ${selected_value}=    Get Selected List Value    id=days
-    Should Be Equal As Strings    ${selected_value}    1
-    ${selected_value}=    Get Selected List Value    id=months
-    Should Be Equal As Strings    ${selected_value}    1
-    ${selected_value}=    Get Selected List Value    id=years
-    Should Be Equal As Strings    ${selected_value}    2000
+    ${selected_value}=              Get Selected List Value     ${BIRTHDAY_SELECTOR}
+    Should Be Equal As Strings      ${selected_value}           ${BIRTHDAY}
+    ${selected_value}=              Get Selected List Value     ${BIRTH_MONTH_SELECTOR}
+    Should Be Equal As Strings      ${selected_value}           ${BIRTH_MONTH}
+    ${selected_value}=              Get Selected List Value     ${BIRTH_YEAR_SELECTOR}
+    Should Be Equal As Strings      ${selected_value}           ${BIRTH_YEAR}
 
-    # Complete registration by clicking the submit button
-    Click Element   id=submitAccount
+    # Complete registration
+    Click Button   ${REGISTER_BUTTON}
 
     # Wait until the success message is visible
-    Wait Until Element Is Visible   xpath=//*[@id="center_column"]/p[1]
+    Wait Until Page Contains Element    ${SUCCESS_MESSAGE}
 
     # Sign out
     Click Element   ${Sign_Out_Button}
 
     # Wait until sign out process fully executed
-    Wait Until Element Is Visible   ${Create_An_Account}
+    Wait Until Element Is Visible   ${CREATE_AN_ACCOUNT_BUTTON}
 
     close browser
 
@@ -84,8 +84,8 @@ Valid login
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${Sign_In_Button}
-    Click Element   ${Sign_In_Button}
+    Wait Until Element Is Visible   ${SIGN_IN_BUTTON} 
+    Click Element   ${SIGN_IN_BUTTON} 
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Element Is Visible   ${Lock_Icon}
@@ -100,7 +100,7 @@ Valid login
     Click Element   ${Sign_Out_Button}
 
     # Wait until sign out process Complete
-    Wait Until Element Is Visible   ${Create_An_Account}
+    Wait Until Element Is Visible   ${CREATE_AN_ACCOUNT_BUTTON}
 
     close browser
 
@@ -110,8 +110,8 @@ Invalid login
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${Sign_In_Button}
-    Click Element   ${Sign_In_Button}
+    Wait Until Element Is Visible   ${SIGN_IN_BUTTON} 
+    Click Element   ${SIGN_IN_BUTTON} 
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Element Is Visible   ${Lock_Icon}
@@ -130,8 +130,8 @@ Add Dress To Cart
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${Sign_In_Button}
-    Click Element   ${Sign_In_Button}
+    Wait Until Element Is Visible   ${SIGN_IN_BUTTON} 
+    Click Element   ${SIGN_IN_BUTTON} 
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Element Is Visible   ${Lock_Icon}

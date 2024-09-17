@@ -5,10 +5,26 @@ Library    SeleniumLibrary
 ${URL}                              http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
-${Sign_In_Button}                   xpath=/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a
-${Create_An_Account}                xpath=//*[@id="SubmitCreate"]/span
+${SIGN_IN_BUTTON}                   xpath=//a[contains(text(),'Sign in')]
+${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
+
+${CREATE_EMAIL_FIELD}               xpath=//input[@id='email_create']
+${REGISTRATION_FORM_HEADER}         xpath=//h3[contains(text(),'Your personal information')]
+${GENDER_SELECTOR_MR}               id=id_gender1
+${FIRSTNAME_FIELD}                  id=customer_firstname
+${LASTNAME_FIELD}                   id=customer_lastname
+${PASSWORD_FIELD}                   id=passwd
+${BIRTHDAY_SELECTOR}                id=days
+${BIRTHDAY}                         1
+${BIRTH_MONTH_SELECTOR}             id=months
+${BIRTH_MONTH}                      1
+${BIRTH_YEAR_SELECTOR}              id=years
+${BIRTH_YEAR}                       2000
+${REGISTER_BUTTON}                  id=submitAccount
+${SUCCESS_MESSAGE}                  xpath=//p[contains(text(),'Your account has been created.')]
+
 ${Lock_Icon}                        xpath=//*[@id="SubmitLogin"]/span
-${Sign_Out_Button}                  xpath=//a[text()="Sign out"]
+${Sign_Out_Button}                  xpath=//a[@class='logout']
 ${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
 ${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
 ${Color_Dress}                      xpath=//*[@id="color_8"]
