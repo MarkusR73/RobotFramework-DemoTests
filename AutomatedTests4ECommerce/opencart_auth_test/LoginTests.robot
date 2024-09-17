@@ -1,5 +1,6 @@
 *** Settings ***
 Resource    LoginResources.robot
+Resource    LoginKeywords.robot
 Test Teardown    Close Browser
 
 *** Test Cases ***
