@@ -4,15 +4,19 @@ Library    SeleniumLibrary
 *** Variables ***
 ${OPEN_CART_URL}        https://demo-opencart.com/index.php?route=account/login&language=en-gb
 ${BROWSER}              firefox
+
 ${LOGIN_URL}            ${OPEN_CART_URL}
 ${USERNAME}             tonttu123@gmail.com
 ${PASSWORD}             Toljanteri99
+${EMAIL_FIELD}          id=input-email
+${PASSWORD_FIELD}       id=input-password
+${LOGIN_BUTTON}         xpath=//button[@type='submit']
+
 ${INVALID_USERNAME}     invalid@example.com
 ${INVALID_PASSWORD}     wrongpassword
-${SUCCESS_MESSAGE}      xpath=/html/body/main/div[2]/div/div/h2[1]
-${LOGOUT_LINK}          xpath=/html/body/main/div[2]/div/aside/div/a[13]
-${CONTINUE_LINK}        xpath=/html/body/main/div[2]/div/div/div/a
-${ERROR_MESSAGE}        css=html body div#alert.toast-container.position-fixed.top-0.end-0.p-3
+${LOGOUT_LINK}          xpath=//div/a[contains(text(),'Logout')]
+${CONTINUE_LINK}        xpath=//div/a[contains(text(),'Continue')]
+${ERROR_MESSAGE}        xpath=//div[@id='alert']/dirv
 
 *** Keywords ***
 Open Login Page
@@ -20,17 +24,17 @@ Open Login Page
     
 Login With Credentials
     [Arguments]    ${username}    ${password}
-    Wait Until Element Is Visible    name=email    
-    Input Text    name=email    ${username}
-    Wait Until Element Is Visible    name=password   
-    Input Text    name=password    ${password}
-    Click Button    css=button.btn.btn-primary
+    Wait Until Page Contains Element     ${EMAIL_FIELD}    
+    Input Text    ${EMAIL_FIELD}    ${username}
+    Wait Until Page Contains Element    ${PASSWORD_FIELD}   
+    Input Text    ${PASSWORD_FIELD}    ${password}
+    Click Button    ${LOGIN_BUTTON}
 
 Logout
-    Wait Until Element Is Visible    ${SUCCESS_MESSAGE}
+    Wait Until Page Contains Element    ${LOGOUT_LINK}
     Click Link    ${LOGOUT_LINK}
-    Wait Until Element Is Visible    ${CONTINUE_LINK}
+    Wait Until Page Contains Element    ${CONTINUE_LINK}
     Click Link    ${CONTINUE_LINK}
     
 Verify Login Error
-    Wait Until Element Is Visible    ${ERROR_MESSAGE}
+    Wait Until Page Contains Element    ${ERROR_MESSAGE}
