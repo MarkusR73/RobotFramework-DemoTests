@@ -43,3 +43,5 @@ ${SUMMARY_TEXT}                     xpath=//h1[@id='cart_title']
 ${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i
 ${DRESS_LOCATOR}                    //tr[@id='product_6_40_0_0']
 ${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
+
+${TOTAL_PRICE}                      id=total_price

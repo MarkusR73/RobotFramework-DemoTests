@@ -215,13 +215,13 @@ Remove from Cart
 
 Verify Total Price
     # Wait for the total price element to be visible
-    Wait Until Page Contains Element    id=total_price
+    Wait Until Element Is Visible   ${TOTAL_PRICE}
 
     # Get the text inside the total price span
-    ${total_price}=    Get Text    id=total_price
+    ${total_price_value}=    Get Text    ${TOTAL_PRICE}
 
     # Verify the total price value
-    Should Be Equal    ${total_price}    $34
+    Should Be Equal    ${total_price_value}    $34
 
 Proceed To Checkout
     # Wait for the checkout link to be visible and click it to proceed 
