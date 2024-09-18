@@ -5,7 +5,7 @@ Library    SeleniumLibrary
 ${URL}                              http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
-${SIGN_IN_BUTTON}                   xpath=//a[contains(text(),'Sign in')]
+${SIGN_IN_LINK}                   xpath=//a[contains(text(),'Sign in')]
 ${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
 
 ${CREATE_EMAIL_FIELD}               xpath=//input[@id='email_create']
@@ -23,19 +23,21 @@ ${BIRTH_YEAR}                       2000
 ${REGISTER_BUTTON}                  id=submitAccount
 ${SUCCESS_MESSAGE}                  xpath=//p[contains(text(),'Your account has been created.')]
 
-${Lock_Icon}                        xpath=//*[@id="SubmitLogin"]/span
-${Sign_Out_Button}                  xpath=//a[@class='logout']
-${Dresses_Link}                     xpath=//*[@id="block_top_menu"]/ul/li[2]/a
-${CHOSEN_DRESS}                     xpath=//*[@id="center_column"]/ul/li[4]/div/div[2]/h5/a
-${Color_Dress}                      xpath=//*[@id="color_8"]
-${WOMEN_Link}                       xpath=//a[@title="Women"]
-${Blouse_Link}                      xpath=//a[@class='product-name' and @title='Blouse']   
-${Color_Blouse}                     xpath=//a[@id="color_8"]                        
-${ADD_TO_CART_BUTTON}               xpath=//span[text()='Add to cart']
-${CONTINUE_SHOPPING_BUTTON}         xpath=//span[text()[contains(., "Continue shopping")]] 
-${HOME_ICON}                        xpath=//i[contains(@class, 'icon-home')]
-${Product_Count}                    css=div.product-count
-${Cart_Link}                        xpath=//b[text()='Cart']
-${Summary_Text}                     xpath=//*[@id="cart_title"]
-${Delete_Dress}                     xpath=//*[@id="6_40_0_0"]/i
-${Checkout_Button}                  xpath=//*[@id="center_column"]/p[2]/a[1]/span
+${LOCK_ICON}                        id=SubmitLogin
+${SIGN_OUT_LINK}                    xpath=//a[@class='logout']
+
+${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
+${CHOSEN_DRESS}                     xpath=//li[4]/div/div[2]/h5/a[@title='Printed Summer Dress']
+${COLOR_WHITE}                      id=color_8
+${WOMEN_LINK}                       xpath=//a[@title="Women"]
+${BLOUSE_LINK}                      xpath=//a[@class='product-name' and @title='Blouse']
+${PRODUCT_LIST_COUNT}              xpath=//div[2]/div[2][@class='product-count']                  
+${ADD_TO_CART_ELEMENT}              xpath=//span[text()='Add to cart']
+${CONTINUE_SHOPPING_LINK}           xpath=//span[@title='Continue shopping'] 
+${HOME_ICON}                        xpath=//a[@title='Return to Home']
+
+${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
+${CART_LINK}                        xpath=//b[text()='Cart']
+${Summary_Text}                     xpath=//h1[@id='cart_title']
+${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i
+${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']						
