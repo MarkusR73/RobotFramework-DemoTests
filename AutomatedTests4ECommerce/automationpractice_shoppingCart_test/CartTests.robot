@@ -26,7 +26,7 @@ Registration
     Maximize Browser Window
 
     # Wait until the sign-in button is visible and click it
-    Wait Until Element Is Visible   ${SIGN_IN_LINK} 
+    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
     Click Element   ${SIGN_IN_LINK} 
 
     # Wait until the "Create An Account" element appears on page
@@ -68,13 +68,13 @@ Registration
     Click Button   ${REGISTER_BUTTON}
 
     # Wait until the success message is visible
-    Wait Until Page Contains Element    ${SUCCESS_MESSAGE}
+    Wait Until Page Contains Element    ${SUCCESS_MESSAGE_REGISTRATION}
 
     # Sign out
     Click Element   ${SIGN_OUT_LINK}
 
     # Wait until sign out process fully executed
-    Wait Until Element Is Visible   ${CREATE_AN_ACCOUNT_BUTTON}
+    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
     close browser
 
@@ -84,23 +84,23 @@ Valid login
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${SIGN_IN_LINK} 
+    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
     Click Element   ${SIGN_IN_LINK} 
     
     # wait until lock button is visible, fill login infos and login
-    Wait Until Element Is Visible   ${LOCK_ICON}
+    Wait Until Page Contains Element   ${LOCK_ICON}
     Input Text  id=email    ${Random_Email}
     Input Text  id=passwd   ${Password}
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
-    Wait Until element Is Visible   xpath=//*[@id="center_column"]/h1
+    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/h1
 
     #Sign out
     Click Element   ${SIGN_OUT_LINK}
 
     # Wait until sign out process Complete
-    Wait Until Element Is Visible   ${CREATE_AN_ACCOUNT_BUTTON}
+    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
     close browser
 
@@ -110,17 +110,17 @@ Invalid login
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${SIGN_IN_LINK} 
+    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
     Click Element   ${SIGN_IN_LINK} 
     
     # wait until lock button is visible, fill login infos and login
-    Wait Until Element Is Visible   ${LOCK_ICON}
+    Wait Until Page Contains Element   ${LOCK_ICON}
     Input Text  id=email    ${Random_Email}
     Input Text  id=passwd   wrongpasswd
     Click Element   ${LOCK_ICON}
 
     # Wait until error message is visible
-    Wait Until element Is Visible   xpath=//*[@id="center_column"]/div[1]/p
+    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/div[1]/p
 
     close browser
 
@@ -130,77 +130,92 @@ Add Dress To Cart
     Maximize Browser Window
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${SIGN_IN_LINK} 
+    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
     Click Element   ${SIGN_IN_LINK} 
     
     # wait until lock button is visible, fill login infos and login
-    Wait Until Element Is Visible   ${LOCK_ICON}
+    Wait Until Page Contains Element   ${LOCK_ICON}
     Input Text  id=email    ${Random_Email}
     Input Text  id=passwd   ${Password}
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
-    Wait Until element Is Visible   xpath=//*[@id="center_column"]/h1
+    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/h1
     Click Element   ${HOME_ICON}
 
     # Wait until page fully loaded
-    Wait Until Element Is Visible   ${DRESSES_LINK}
+    Wait Until Page Contains Element   ${DRESSES_LINK}
     Click Element   ${DRESSES_LINK}
 
+    # Wait until page fully loaded
     Wait Until Page Contains Element   ${PRODUCT_LIST_COUNT}
     Click or Scroll    ${CHOSEN_DRESS}
     
-    Wait Until Element Is Visible   ${COLOR_WHITE}
+    # Wait until page fully loaded
+    Wait Until Page Contains Element   ${COLOR_WHITE}
     # Select color currently in stock
     Click Element   ${COLOR_WHITE}
 
-    Wait Until Page Contains Element   ${ADD_TO_CART_ELEMENT}
+    # Wait until the page reacts to the color choice and "Add to Cart"-element becomes interactable
+    Wait Until Element Is Visible   ${ADD_TO_CART_ELEMENT}
+    Wait Until Element Is Enabled   ${ADD_TO_CART_ELEMENT}
     Click Element   ${ADD_TO_CART_ELEMENT}
 
-    Wait Until Page Contains Element    ${CONTINUE_SHOPPING_LINK}
+    # Wait until the popup-window elements are interactable
+    Wait Until Element Is Visible   ${SUCCESS_MESSAGE_PRODUCT_ADDED}
+    Wait Until Element Is Enabled   ${CONTINUE_SHOPPING_LINK}
     Click Element   ${CONTINUE_SHOPPING_LINK}
     
+    # Wait until the popup-window is closed and home icon becomes visible
     Wait Until Element Is Visible   ${HOME_ICON}
     Click Element   ${HOME_ICON}
 
 Add Blouse To Cart
-    Wait Until Element Is Visible   ${WOMEN_LINK}
+    # Wait until page fully loaded
+    Wait Until Page Contains Element   ${WOMEN_LINK}
     Click Element   ${WOMEN_LINK}
 
-    Wait Until Element Is Visible   ${PRODUCT_LIST_COUNT}
+    # Wait until page fully loaded
+    Wait Until Page Contains Element   ${PRODUCT_LIST_COUNT}
     Click or Scroll    ${BLOUSE_LINK}
 
     
-    Wait Until Element Is Visible   ${COLOR_WHITE}
+    # Wait until page fully loaded
+    Wait Until Page Contains Element   ${COLOR_WHITE}
     # Select color currently in stock
     Click Element   ${COLOR_WHITE}
-    
-    Wait Until Page Contains Element   ${ADD_TO_CART_ELEMENT}
+
+    # Wait until the page reacts to the color choice and "Add to Cart"-element becomes interactable
+    Wait Until Element Is Visible   ${ADD_TO_CART_ELEMENT}
+    Wait Until Element Is Enabled   ${ADD_TO_CART_ELEMENT}
     Click Element   ${ADD_TO_CART_ELEMENT}
     
-    Wait Until Element Is Visible   ${CONTINUE_SHOPPING_LINK}
+    # Wait until the popup-window elements are interactable
+    Wait Until Element Is Visible   ${SUCCESS_MESSAGE_PRODUCT_ADDED}
+    Wait Until Element Is Enabled   ${CONTINUE_SHOPPING_LINK}
     Click Element   ${CONTINUE_SHOPPING_LINK}
 
+    # Wait until the popup-window is closed and home icon becomes visible
     Wait Until Element Is Visible   ${HOME_ICON}
     Click Element   ${HOME_ICON}
 
 Remove from Cart
     # Wait until the shopping cart icon is visible, then enter the cart
-    Wait Until Element Is Visible   ${CART_LINK} 
+    Wait Until Page Contains Element   ${CART_LINK} 
     Click Element   ${CART_LINK} 
 
     # Wait until the page is fully loaded, then remove the dress from the cart
-    Wait Until Element Is Visible   ${Summary_Text}
-    Wait Until Element Is Visible   ${DELETE_ICON_DRESS}
+    Wait Until Page Contains Element   ${SUMMARY_TEXT}
+    Wait Until Element Is Enabled   ${DELETE_ICON_DRESS}
     Click Or Scroll     ${DELETE_ICON_DRESS}
     
     # Wait until the dress is removed from the cart and verify
-    Wait Until Element Is Not Visible   xpath=//a[contains(@href, 'id_product=6')]
+    Wait Until Element Is Not Visible   ${DRESS_LOCATOR}
     Wait Until Expected Value Is Visible    1 product   ${PRODUCT_COUNT_ELEMENT}
 
 Verify Total Price
     # Wait for the total price element to be visible
-    Wait Until Element Is Visible    id=total_price
+    Wait Until Page Contains Element    id=total_price
 
     # Get the text inside the total price span
     ${total_price}=    Get Text    id=total_price
@@ -210,11 +225,11 @@ Verify Total Price
 
 Proceed To Checkout
     # Wait for the checkout link to be visible and click it to proceed 
-    Wait Until Element Is Visible   ${CHECKOUT_LINK}
+    Wait Until Page Contains Element   ${CHECKOUT_LINK}
     Click Element   ${CHECKOUT_LINK}
 
     # Wait for the address info header to appear before filling out the address form
-    Wait Until Element Is Visible   xpath=//*[@id="center_column"]/div/h1
+    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/div/h1
     ${Address}=     Generate Random String
     Input Text      id=address1     ${Address}
     ${City}=     Generate Random String
@@ -226,7 +241,7 @@ Proceed To Checkout
     Click Element   xpath=//*[@id="submitAddress"]/span
 
     # Wait until the address delivery section is visible and click the "Proceed" button
-    Wait Until Element Is Visible   xpath=//*[@id="address_delivery"]/li[7]/a/span
+    Wait Until Page Contains Element   xpath=//*[@id="address_delivery"]/li[7]/a/span
     Click Or Scroll     xpath=//*[@id="center_column"]/form/p/button/span
 
     # Wait for the terms and conditions checkbox to be visible and click it
@@ -253,5 +268,5 @@ Proceed To Checkout
     Click Element    xpath=//button[@type='submit' and contains(span, 'I confirm my order')]
 
     # Verify that the order confirmation message is displayed
-    Wait Until Element Is Visible   xpath=//p[@class='alert alert-success']
+    Wait Until Page Contains Element   xpath=//p[@class='alert alert-success']
     Element Text Should Be    xpath=//p[@class='alert alert-success']    Your order on My Shop is complete.

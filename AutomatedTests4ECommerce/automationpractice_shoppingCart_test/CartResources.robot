@@ -21,7 +21,7 @@ ${BIRTH_MONTH}                      1
 ${BIRTH_YEAR_SELECTOR}              id=years
 ${BIRTH_YEAR}                       2000
 ${REGISTER_BUTTON}                  id=submitAccount
-${SUCCESS_MESSAGE}                  xpath=//p[contains(text(),'Your account has been created.')]
+${SUCCESS_MESSAGE_REGISTRATION}     xpath=//p[contains(text(),'Your account has been created.')]
 
 ${LOCK_ICON}                        id=SubmitLogin
 ${SIGN_OUT_LINK}                    xpath=//a[@class='logout']
@@ -31,13 +31,15 @@ ${CHOSEN_DRESS}                     xpath=//li[4]/div/div[2]/h5/a[@title='Printe
 ${COLOR_WHITE}                      id=color_8
 ${WOMEN_LINK}                       xpath=//a[@title="Women"]
 ${BLOUSE_LINK}                      xpath=//a[@class='product-name' and @title='Blouse']
-${PRODUCT_LIST_COUNT}              xpath=//div[2]/div[2][@class='product-count']                  
-${ADD_TO_CART_ELEMENT}              xpath=//span[text()='Add to cart']
+${PRODUCT_LIST_COUNT}               xpath=//div[2]/div[2][@class='product-count']                  
+${ADD_TO_CART_ELEMENT}              xpath=//p[@id='add_to_cart']/button
+${SUCCESS_MESSAGE_PRODUCT_ADDED}    xpath=//h2[contains(., 'Product successfully added to your shopping cart')]
 ${CONTINUE_SHOPPING_LINK}           xpath=//span[@title='Continue shopping'] 
 ${HOME_ICON}                        xpath=//a[@title='Return to Home']
 
 ${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
 ${CART_LINK}                        xpath=//b[text()='Cart']
-${Summary_Text}                     xpath=//h1[@id='cart_title']
+${SUMMARY_TEXT}                     xpath=//h1[@id='cart_title']
 ${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i
-${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']						
+${DRESS_LOCATOR}                    //tr[@id='product_6_40_0_0']
+${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
