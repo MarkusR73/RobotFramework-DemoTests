@@ -225,48 +225,50 @@ Verify Total Price
 
 Proceed To Checkout
     # Wait for the checkout link to be visible and click it to proceed 
-    Wait Until Page Contains Element   ${CHECKOUT_LINK}
+    Wait Until Element Is Visible   ${CHECKOUT_LINK}
     Click Element   ${CHECKOUT_LINK}
 
     # Wait for the address info header to appear before filling out the address form
-    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/div/h1
-    ${Address}=     Generate Random String
-    Input Text      id=address1     ${Address}
-    ${City}=     Generate Random String
-    Input Text      id=city     ${City}
-    Select From List By Value   id=id_state     1
-    Input Text      id=postcode     90500
-    Select From List By Value   id=id_country   21
-    Input Text      id=phone    +358 50 666 5555
-    Click Element   xpath=//*[@id="submitAddress"]/span
+    Wait Until Page Contains Element   ${YOUR_ADDRESSES_HEADER} 
+    ${Address}=                         Generate Random String
+    Input Text                          ${ADDRESS_FIELD}            ${Address}
+    ${City}=                            Generate Random String
+    Input Text                          ${CITY_FIELD}               ${City}
+    Select From List By Value           ${STATE_LIST}               ${STATE_VALUE}
+    Input Text                          ${POSTCODE_FIELD}           ${POSTCODE_VALUE}
+    Select From List By Value           ${COUNTRY_LIST}             ${COUNTRY_VALUE}
+    Input Text                          ${HOME_PHONE_FIELD}         ${HOME_PHONE_NUMBER}
+    Click Button   ${SAVE_BUTTON}
 
-    # Wait until the address delivery section is visible and click the "Proceed" button
-    Wait Until Page Contains Element   xpath=//*[@id="address_delivery"]/li[7]/a/span
-    Click Or Scroll     xpath=//*[@id="center_column"]/form/p/button/span
+    # Wait until the address delivery section is visible, 
+    Wait Until Page Contains Element    ${CHECKBOX_DELIVERY_ADDRESS}
+
+    # Verify that the "Use delivery address as the billing address"-box is checked and click the "Proceed"-button
+    ${Checkbox1_value}=             Get Element Attribute       ${CHECKBOX_DELIVERY_ADDRESS}    class
+    Should Be Equal As Strings      ${Checkbox1_value}          checked
+    Click Or Scroll                 ${PROCEED_TO_CHECKOUT_BUTTON}
 
     # Wait for the terms and conditions checkbox to be visible and click it
-    Wait Until Page Contains Element   id=cgv
-    Click Element   id=cgv
-
-    # Verify that the terms and conditions checkbox is selected
-    ${checked}=    Get Element Attribute    id=cgv    checked
-    Should Be Equal As Strings    ${checked}    true
+    Wait Until Page Contains Element    ${AGREE_TERMS_CHECKBOX}
+    Click Element   ${AGREE_TERMS_CHECKBOX}
 
     # Click the button to proceed to the next step
-    Click Element   name=processCarrier
+    Click Element   ${PROCEED_TO_CHECKOUT_BUTTON}
 
     # Validate total price and log the result
-    ${total_price}=    Get Text    id=total_price
-    Run Keyword And Continue On Failure    Should Be Equal    ${total_price}    $34
+    ${total_price}=                         Get Text            ${TOTAL_PRICE}
+    Run Keyword And Continue On Failure     Should Be Equal     ${total_price}    $34
     Log    Total price is: ${total_price}
 
     # Click the "Pay by check" option to proceed with payment
-    Click Element    xpath=//a[@title='Pay by check.']
+    Click Element    ${PAY_BY_CHECK_ELEMENT} 
 
     # Wait for the "Confirm my order" button to be visible and click it
-    Wait Until Page Contains Element   xpath=//button[@type='submit' and contains(span, 'I confirm my order')]
-    Click Element    xpath=//button[@type='submit' and contains(span, 'I confirm my order')]
+    Wait Until Page Contains Element    ${CONFIRM_MY_ORDER_BUTTON}
+    Click Element   ${CONFIRM_MY_ORDER_BUTTON}
 
     # Verify that the order confirmation message is displayed
-    Wait Until Page Contains Element   xpath=//p[@class='alert alert-success']
-    Element Text Should Be    xpath=//p[@class='alert alert-success']    Your order on My Shop is complete.
+    Wait Until Page Contains Element    ${ORDER_COMPLETE_MESSAGE}
+    Element Text Should Be      ${ORDER_COMPLETE_MESSAGE}       Your order on My Shop is complete.
+
+    Close Browser
