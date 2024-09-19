@@ -42,6 +42,7 @@ ${CONTINUE_SHOPPING_LINK}           xpath=//span[@title='Continue shopping']
 ${HOME_ICON}                        xpath=//a[@title='Return to Home']
 
 ${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
+${EXPECTED_COUNT}                   1 product
 ${CART_LINK}                        xpath=//b[text()='Cart']
 ${SUMMARY_TEXT}                     xpath=//h1[@id='cart_title']
 ${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i

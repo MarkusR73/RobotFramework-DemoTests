@@ -1,15 +1,14 @@
 *** Settings ***
 Resource    CartResources.robot
 Resource    CartKeywords.robot
+Library     RandomRegistration.py
 Library     SeleniumLibrary
-Suite Setup         Open Browser And Go To URL
-Suite Teardown      Close Browser
-Library             RandomRegistration.py
 
 *** Test Cases ***
 Registration
     Generate User Information
-    Go To   ${URL}
+
+    Open Browser And Go To URL
     Maximize Browser Window
 
     # Wait until the sign-in button is visible and click it
@@ -55,7 +54,7 @@ Registration
     # Wait until sign out process fully executed
     Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
-    close browser
+    Close Browser
 
 *** Test Cases ***
 Valid login
@@ -81,7 +80,7 @@ Valid login
     # Wait until sign out process Complete
     Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
-    close browser
+    Close Browser
 
 *** Test Cases ***
 Invalid login
@@ -101,7 +100,7 @@ Invalid login
     # Wait until error message is visible
     Wait Until Element Is Visible   ${INVALID_PASSWORD_ERROR}
 
-    close browser
+    Close Browser
 
 *** Test Cases ***
 Add Dress To Cart
@@ -190,7 +189,7 @@ Remove from Cart
     
     # Wait until the dress is removed from the cart and verify
     Wait Until Element Is Not Visible   ${DRESS_LOCATOR}
-    Wait Until Expected Value Is Visible    1 product   ${PRODUCT_COUNT_ELEMENT}
+    Wait Until Expected Value Is Visible    ${EXPECTED_COUNT}   ${PRODUCT_COUNT_ELEMENT}
 
 Verify Total Price
     # Wait for the total price element to be visible
@@ -229,7 +228,7 @@ Proceed To Checkout
     Wait Until Page Contains Element    ${AGREE_TERMS_CHECKBOX}
     Click Element   ${AGREE_TERMS_CHECKBOX}
 
-    # Click the button to proceed to the next step
+    # Click the button to proceed 
     Click Element   ${PROCEED_TO_CHECKOUT_BUTTON}
 
     # Validate total price and log the result
