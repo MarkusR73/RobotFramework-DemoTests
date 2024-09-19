@@ -61,15 +61,8 @@ Valid login
     Open Browser And Go To URL
     Maximize Browser Window
 
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
-    Click Element   ${SIGN_IN_LINK} 
-    
-    # wait until lock button is visible, fill login infos and login
-    Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
-    Input Text  ${LOGIN_PASSWORD_FIELD}   ${USER_INFORMATION.PASSWORD}
-    Click Element   ${LOCK_ICON}
+    # Call sign in keyword
+    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
 
     # Wait until "my account" header is visible
     Wait Until Element Is Visible   ${MY_ACCOUNT_HEADER}
@@ -87,15 +80,8 @@ Invalid login
     Open Browser And Go To URL
     Maximize Browser Window
 
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
-    Click Element   ${SIGN_IN_LINK} 
-    
-    # wait until lock button is visible, fill login infos and login
-    Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
-    Input Text  ${LOGIN_PASSWORD_FIELD}   ${WRONG_PASSWORD}
-    Click Element   ${LOCK_ICON}
+    # Call sign in keyword
+    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
 
     # Wait until error message is visible
     Wait Until Element Is Visible   ${INVALID_PASSWORD_ERROR}
@@ -107,15 +93,8 @@ Add Dress To Cart
     Open Browser And Go To URL
     Maximize Browser Window
 
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
-    Click Element   ${SIGN_IN_LINK} 
-    
-    # wait until lock button is visible, fill login infos and login
-    Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
-    Input Text  ${LOGIN_PASSWORD_FIELD}   ${USER_INFORMATION.PASSWORD}
-    Click Element   ${LOCK_ICON}
+    # Call sign in keyword
+    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
 
     # Wait until "my account" header is visible
     Wait Until Page Contains Element   ${MY_ACCOUNT_HEADER}

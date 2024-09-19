@@ -11,6 +11,18 @@ Generate User Information
 Open Browser And Go To URL
     Open Browser    ${URL}    ${BROWSER}
 
+Try To Sign In
+    [Arguments]     ${email}    ${password}
+    # Wait until page fully loaded
+    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
+    Click Element   ${SIGN_IN_LINK} 
+    
+    # wait until lock button is visible, fill login infos and login
+    Wait Until Page Contains Element   ${LOCK_ICON}
+    Input Text  ${LOGIN_EMAIL_FIELD}    ${email}
+    Input Text  ${LOGIN_PASSWORD_FIELD}   ${password}
+    Click Element   ${LOCK_ICON}
+
 # Try to click the desired element. If not clickable, scroll and try again
 Click Or Scroll
     [Arguments]    ${locator}
