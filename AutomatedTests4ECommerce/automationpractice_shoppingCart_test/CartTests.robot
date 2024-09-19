@@ -7,16 +7,8 @@ Suite Teardown      Close Browser
 Library             RandomRegistration.py
 
 *** Test Cases ***
-Generate user info
-    ${USER_INFORMATION.EMAIL}=      Generate Random Email
-    ${USER_INFORMATION.FIRSTNAME}=  Generate Random String
-    ${USER_INFORMATION.LASTNAME}=   Generate Random String
-    ${USER_INFORMATION.PASSWORD}=   Generate Random String
-    ${USER_INFORMATION.ADDRESS}=    Generate Random String
-    ${USER_INFORMATION.CITY}=       Generate Random String
-
-*** Test Cases ***
-Registration 
+Registration
+    Generate User Information
     Go To   ${URL}
     Maximize Browser Window
 

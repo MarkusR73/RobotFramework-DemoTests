@@ -1,4 +1,13 @@
 *** Keywords ***
+Generate User Information
+    [Arguments]
+    ${USER_INFORMATION.EMAIL}=      Generate Random Email
+    ${USER_INFORMATION.FIRSTNAME}=  Generate Random String
+    ${USER_INFORMATION.LASTNAME}=   Generate Random String
+    ${USER_INFORMATION.PASSWORD}=   Generate Random String
+    ${USER_INFORMATION.ADDRESS}=    Generate Random String
+    ${USER_INFORMATION.CITY}=       Generate Random String
+
 Open Browser And Go To URL
     Open Browser    ${URL}    ${BROWSER}
 
