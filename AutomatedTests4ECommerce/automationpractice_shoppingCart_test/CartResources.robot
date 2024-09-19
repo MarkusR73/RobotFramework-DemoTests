@@ -5,6 +5,8 @@ Library    SeleniumLibrary
 ${URL}                              http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
+&{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
+
 ${SIGN_IN_LINK}                     xpath=//a[contains(text(),'Sign in')]
 ${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
 
@@ -23,8 +25,11 @@ ${BIRTH_YEAR}                       2000
 ${REGISTER_BUTTON}                  id=submitAccount
 ${SUCCESS_MESSAGE_REGISTRATION}     xpath=//p[contains(text(),'Your account has been created.')]
 
+${LOGIN_EMAIL_FIELD}                id=email
+${LOGIN_PASSWORD_FIELD}             id=passwd
 ${LOCK_ICON}                        id=SubmitLogin
 ${SIGN_OUT_LINK}                    xpath=//a[@class='logout']
+${WRONG_PASSWORD}                   wrong
 
 ${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
 ${CHOSEN_DRESS}                     xpath=//li[4]/div/div[2]/h5/a[@title='Printed Summer Dress']
@@ -50,13 +55,9 @@ ${YOUR_ADDRESSES_HEADER}            xpath=//h1[text()='Your addresses']
 ${ADDRESS_FIELD}                    id=address1
 ${CITY_FIELD}                       id=city
 ${STATE_LIST}                       id=id_state
-${STATE_VALUE}                      1
 ${POSTCODE_FIELD}                   id=postcode
-${POSTCODE_VALUE}                   90500
 ${COUNTRY_LIST}                     id=id_country
-${COUNTRY_VALUE}                    21
 ${HOME_PHONE_FIELD}                 id=phone
-${HOME_PHONE_NUMBER}                +358 50 666 5555
 ${SAVE_BUTTON}                      id=submitAddress
 ${CHECKBOX_DELIVERY_ADDRESS}        xpath=//div[@class='checker']/span
 ${PROCEED_TO_CHECKOUT_BUTTON}       xpath=//p/button[@type='submit']

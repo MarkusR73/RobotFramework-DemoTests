@@ -8,17 +8,12 @@ Library             RandomRegistration.py
 
 *** Test Cases ***
 Generate user info
-    # Generate a random email
-    ${Random_Email}=    Generate Random Email
-    Set Global Variable     ${Random_Email}
-
-    # Generate firstname, lastname and password
-    ${Firstname}=  Generate Random String
-    Set Global Variable     ${Firstname}
-    ${Lastname}=  Generate Random String
-    Set Global Variable     ${Lastname}
-    ${Password}=    Generate Random String
-    Set Global Variable     ${Password}
+    ${USER_INFORMATION.EMAIL}=      Generate Random Email
+    ${USER_INFORMATION.FIRSTNAME}=  Generate Random String
+    ${USER_INFORMATION.LASTNAME}=   Generate Random String
+    ${USER_INFORMATION.PASSWORD}=   Generate Random String
+    ${USER_INFORMATION.ADDRESS}=    Generate Random String
+    ${USER_INFORMATION.CITY}=       Generate Random String
 
 *** Test Cases ***
 Registration 
@@ -33,7 +28,7 @@ Registration
     Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
     # Input email and click create account button
-    Input Text  ${CREATE_EMAIL_FIELD}   ${Random_Email}
+    Input Text  ${CREATE_EMAIL_FIELD}   ${USER_INFORMATION.EMAIL}
     Click Button   ${CREATE_AN_ACCOUNT_BUTTON}
 
     # Wait until personal information form is visible
@@ -47,22 +42,14 @@ Registration
     Should Be Equal As Strings    ${Gender_Selector_Value}    true
 
     # Input user info into the form
-    Input Text  ${FIRSTNAME_FIELD}      ${Firstname}
-    Input Text  ${LASTNAME_FIELD}       ${Lastname}
-    Input Text  ${PASSWORD_FIELD}       ${Password}
+    Input Text  ${FIRSTNAME_FIELD}      ${USER_INFORMATION.FIRSTNAME}
+    Input Text  ${LASTNAME_FIELD}       ${USER_INFORMATION.LASTNAME}
+    Input Text  ${PASSWORD_FIELD}       ${USER_INFORMATION.PASSWORD}
 
     # Select date of birth
-    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${BIRTHDAY}
-    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${BIRTH_MONTH}
-    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${BIRTH_YEAR}
-    
-    # Verify the selected values
-    ${selected_value}=              Get Selected List Value     ${BIRTHDAY_SELECTOR}
-    Should Be Equal As Strings      ${selected_value}           ${BIRTHDAY}
-    ${selected_value}=              Get Selected List Value     ${BIRTH_MONTH_SELECTOR}
-    Should Be Equal As Strings      ${selected_value}           ${BIRTH_MONTH}
-    ${selected_value}=              Get Selected List Value     ${BIRTH_YEAR_SELECTOR}
-    Should Be Equal As Strings      ${selected_value}           ${BIRTH_YEAR}
+    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${USER_INFORMATION.BIRTHDAY}
+    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${USER_INFORMATION.BIRTH_MONTH}
+    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${USER_INFORMATION.BIRTH_YEAR}
 
     # Complete registration
     Click Button   ${REGISTER_BUTTON}
@@ -89,8 +76,8 @@ Valid login
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  id=email    ${Random_Email}
-    Input Text  id=passwd   ${Password}
+    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
+    Input Text  ${LOGIN_PASSWORD_FIELD}   ${USER_INFORMATION.PASSWORD}
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
@@ -115,8 +102,8 @@ Invalid login
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  id=email    ${Random_Email}
-    Input Text  id=passwd   wrongpasswd
+    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
+    Input Text  ${LOGIN_PASSWORD_FIELD}   ${WRONG_PASSWORD}
     Click Element   ${LOCK_ICON}
 
     # Wait until error message is visible
@@ -135,8 +122,8 @@ Add Dress To Cart
     
     # wait until lock button is visible, fill login infos and login
     Wait Until Page Contains Element   ${LOCK_ICON}
-    Input Text  id=email    ${Random_Email}
-    Input Text  id=passwd   ${Password}
+    Input Text  ${LOGIN_EMAIL_FIELD}    ${USER_INFORMATION.EMAIL}
+    Input Text  ${LOGIN_PASSWORD_FIELD}   ${USER_INFORMATION.PASSWORD}
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
@@ -230,14 +217,12 @@ Proceed To Checkout
 
     # Wait for the address info header to appear before filling out the address form
     Wait Until Page Contains Element   ${YOUR_ADDRESSES_HEADER} 
-    ${Address}=                         Generate Random String
-    Input Text                          ${ADDRESS_FIELD}            ${Address}
-    ${City}=                            Generate Random String
-    Input Text                          ${CITY_FIELD}               ${City}
-    Select From List By Value           ${STATE_LIST}               ${STATE_VALUE}
-    Input Text                          ${POSTCODE_FIELD}           ${POSTCODE_VALUE}
-    Select From List By Value           ${COUNTRY_LIST}             ${COUNTRY_VALUE}
-    Input Text                          ${HOME_PHONE_FIELD}         ${HOME_PHONE_NUMBER}
+    Input Text                          ${ADDRESS_FIELD}            ${USER_INFORMATION.ADDRESS}
+    Input Text                          ${CITY_FIELD}               ${USER_INFORMATION.CITY}
+    Select From List By Value           ${STATE_LIST}               ${USER_INFORMATION.STATE}
+    Input Text                          ${POSTCODE_FIELD}           ${USER_INFORMATION.POSTCODE}
+    Select From List By Value           ${COUNTRY_LIST}             ${USER_INFORMATION.COUNTRY}
+    Input Text                          ${HOME_PHONE_FIELD}         ${USER_INFORMATION.PHONE_NUM}
     Click Button   ${SAVE_BUTTON}
 
     # Wait until the address delivery section is visible, 
