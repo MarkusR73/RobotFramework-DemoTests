@@ -73,7 +73,7 @@ Valid login
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
-    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/h1
+    Wait Until Element Is Visible   ${MY_ACCOUNT_HEADER}
 
     #Sign out
     Click Element   ${SIGN_OUT_LINK}
@@ -99,7 +99,7 @@ Invalid login
     Click Element   ${LOCK_ICON}
 
     # Wait until error message is visible
-    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/div[1]/p
+    Wait Until Element Is Visible   ${INVALID_PASSWORD_ERROR}
 
     close browser
 
@@ -119,7 +119,7 @@ Add Dress To Cart
     Click Element   ${LOCK_ICON}
 
     # Wait until "my account" header is visible
-    Wait Until Page Contains Element   xpath=//*[@id="center_column"]/h1
+    Wait Until Page Contains Element   ${MY_ACCOUNT_HEADER}
     Click Element   ${HOME_ICON}
 
     # Wait until page fully loaded

@@ -17,19 +17,18 @@ ${FIRSTNAME_FIELD}                  id=customer_firstname
 ${LASTNAME_FIELD}                   id=customer_lastname
 ${PASSWORD_FIELD}                   id=passwd
 ${BIRTHDAY_SELECTOR}                id=days
-${BIRTHDAY}                         1
 ${BIRTH_MONTH_SELECTOR}             id=months
-${BIRTH_MONTH}                      1
 ${BIRTH_YEAR_SELECTOR}              id=years
-${BIRTH_YEAR}                       2000
 ${REGISTER_BUTTON}                  id=submitAccount
 ${SUCCESS_MESSAGE_REGISTRATION}     xpath=//p[contains(text(),'Your account has been created.')]
 
 ${LOGIN_EMAIL_FIELD}                id=email
 ${LOGIN_PASSWORD_FIELD}             id=passwd
 ${LOCK_ICON}                        id=SubmitLogin
+${MY_ACCOUNT_HEADER}                xpath=//h1[text()='My account']
 ${SIGN_OUT_LINK}                    xpath=//a[@class='logout']
 ${WRONG_PASSWORD}                   wrong
+${INVALID_PASSWORD_ERROR}           xpath=//p[text()='There is 1 error']
 
 ${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
 ${CHOSEN_DRESS}                     xpath=//li[4]/div/div[2]/h5/a[@title='Printed Summer Dress']
