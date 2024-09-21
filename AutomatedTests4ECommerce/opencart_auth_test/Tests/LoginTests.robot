@@ -1,7 +1,9 @@
 *** Settings ***
-Resource    LoginResources.robot
-Resource    LoginKeywords.robot
-Test Teardown    Close Browser
+Resource    ../Resources/PO/LoginResources.robot
+Resource    ../Resources/PO/LoginKeywords.robot
+Resource    ../Resources/PO/common.robot
+Test Setup      Begin Web Test
+Test Teardown   End Web Test
 
 *** Test Cases ***
 Valid User Can Login
