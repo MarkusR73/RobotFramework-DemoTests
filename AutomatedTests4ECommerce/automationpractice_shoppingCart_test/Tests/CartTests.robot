@@ -45,33 +45,11 @@ Add Dress To Cart
     Should Move To Home Page
 
 Add Blouse To Cart
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${WOMEN_LINK}
-    Click Element   ${WOMEN_LINK}
-
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${PRODUCT_LIST_COUNT}
-    Click or Scroll    ${BLOUSE_LINK}
-
-    
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${COLOR_WHITE}
-    # Select color currently in stock
-    Click Element   ${COLOR_WHITE}
-
-    # Wait until the page reacts to the color choice and "Add to Cart"-element becomes interactable
-    Wait Until Element Is Visible   ${ADD_TO_CART_ELEMENT}
-    Wait Until Element Is Enabled   ${ADD_TO_CART_ELEMENT}
-    Click Element   ${ADD_TO_CART_ELEMENT}
-    
-    # Wait until the popup-window elements are interactable
-    Wait Until Element Is Visible   ${SUCCESS_MESSAGE_PRODUCT_ADDED}
-    Wait Until Element Is Enabled   ${CONTINUE_SHOPPING_LINK}
-    Click Element   ${CONTINUE_SHOPPING_LINK}
-
-    # Wait until the popup-window is closed and home icon becomes visible
-    Wait Until Element Is Visible   ${HOME_ICON}
-    Click Element   ${HOME_ICON}
+    Home Page Should Load
+    Should Move To Women Page
+    Should Choose Blouse
+    Should Add Blouse To Cart
+    Should Move To Home Page
 
 Remove from Cart
     # Wait until the shopping cart icon is visible, then enter the cart

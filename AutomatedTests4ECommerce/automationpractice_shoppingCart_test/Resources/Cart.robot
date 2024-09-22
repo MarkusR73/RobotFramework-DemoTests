@@ -1,4 +1,6 @@
 *** Settings ***
+Resource    PO/BlouseProductPage.robot
+Resource    PO/WomenPage.robot
 Resource    PO/ProductAdditionSuccessWindow.robot
 Resource    PO/DressProductPage.robot
 Resource    Po/DressesPage.robot
@@ -62,9 +64,24 @@ Should Choose Dress
     DressProductPage.Verify Load
 
 Should Add Dress To Cart
-    DressProductPage.Choose Dress Color
+    DressProductPage.Choose Color
     DressProductPage.Verify Availability
     DressProductPage.Add To Cart
+    ProductAdditionSuccessWindow.Verify Appearance
+    ProductAdditionSuccessWindow.Continue Shopping
+
+Should Move To Women Page
+    HomePage.Click Women Link
+    WomenPage.Verify Load
+
+Should Choose Blouse
+    WomenPage.Choose Blouse
+    BlouseProductPage.Verify Load
+
+Should Add Blouse To Cart
+    BlouseProductPage.Choose Color
+    BlouseProductPage.Verify Availability
+    BlouseProductPage.Add To Cart
     ProductAdditionSuccessWindow.Verify Appearance
     ProductAdditionSuccessWindow.Continue Shopping
 

@@ -6,6 +6,7 @@ ${URL}                              http://www.automationpractice.pl/index.php
 ${HOMEPAGE_SLIDER}                  //div[@id='homepage-slider']
 ${SIGN_IN_LINK}                     xpath=//a[contains(text(),'Sign in')]
 ${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
+${WOMEN_LINK}                       xpath=//a[@title="Women"]
 
 *** Keywords ***
 Open Page
@@ -19,3 +20,6 @@ Click Sign In Link
 
 Click Dresses Link
     Click Element   ${DRESSES_LINK}
+
+Click Women Link
+    Click Element   ${WOMEN_LINK}

@@ -2,13 +2,13 @@
 Library     SeleniumLibrary
 
 *** Variables ***
-${Product_Reference_Dress}                xpath=//p/span[text()='demo_6']
+${PRODUCT_REFERENCE_BLOUSE}         xpath=//span[text()='demo_2']
 ${COLOR_WHITE}                      id=color_8
 ${ADD_TO_CART_ELEMENT}              xpath=//p[@id='add_to_cart']/button
 
 *** Keywords ***
 Verify Load
-    Wait Until Page Contains Element    ${Product_Reference_Dress}
+    Wait Until Page Contains Element    ${PRODUCT_REFERENCE_BLOUSE}
 
 Choose Color
     Click Element   ${COLOR_WHITE}
