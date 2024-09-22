@@ -1,3 +1,8 @@
+*** Settings ***
+Resource    CartResources.robot
+Library    RandomRegistration.py
+Library    SeleniumLibrary
+
 *** Keywords ***
 Generate User Information
     [Arguments]

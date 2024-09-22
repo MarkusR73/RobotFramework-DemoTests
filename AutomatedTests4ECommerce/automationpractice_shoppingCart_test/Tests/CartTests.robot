@@ -1,8 +1,10 @@
 *** Settings ***
-Resource    CartResources.robot
-Resource    CartKeywords.robot
-Library     RandomRegistration.py
+Resource    ../Resources/CartResources.robot
+Resource    ../Resources/CartKeywords.robot
 Library     SeleniumLibrary
+
+# Run the script:
+# robot -d Results Tests/CartTests.robot
 
 *** Test Cases ***
 Registration
