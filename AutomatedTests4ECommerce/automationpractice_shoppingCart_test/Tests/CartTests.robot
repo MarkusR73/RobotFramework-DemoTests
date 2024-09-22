@@ -36,40 +36,13 @@ Invalid login
 *** Test Cases ***
 Add Dress To Cart
     Home Page Should Load
-
-    # Call sign in keyword
-    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
-
-    # Wait until "my account" header is visible
-    Wait Until Page Contains Element   ${MY_ACCOUNT_HEADER}
-    Click Element   ${HOME_ICON}
-
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${DRESSES_LINK}
-    Click Element   ${DRESSES_LINK}
-
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${PRODUCT_LIST_COUNT}
-    Click or Scroll    ${CHOSEN_DRESS}
-    
-    # Wait until page fully loaded
-    Wait Until Page Contains Element   ${COLOR_WHITE}
-    # Select color currently in stock
-    Click Element   ${COLOR_WHITE}
-
-    # Wait until the page reacts to the color choice and "Add to Cart"-element becomes interactable
-    Wait Until Element Is Visible   ${ADD_TO_CART_ELEMENT}
-    Wait Until Element Is Enabled   ${ADD_TO_CART_ELEMENT}
-    Click Element   ${ADD_TO_CART_ELEMENT}
-
-    # Wait until the popup-window elements are interactable
-    Wait Until Element Is Visible   ${SUCCESS_MESSAGE_PRODUCT_ADDED}
-    Wait Until Element Is Enabled   ${CONTINUE_SHOPPING_LINK}
-    Click Element   ${CONTINUE_SHOPPING_LINK}
-    
-    # Wait until the popup-window is closed and home icon becomes visible
-    Wait Until Element Is Visible   ${HOME_ICON}
-    Click Element   ${HOME_ICON}
+    Should Move To Sign In Page
+    Sign In Should Succeed
+    Should Move To Home Page
+    Should Move To Dresses Page
+    Should Choose Dress
+    Should Add Dress To Cart
+    Should Move To Home Page
 
 Add Blouse To Cart
     # Wait until page fully loaded

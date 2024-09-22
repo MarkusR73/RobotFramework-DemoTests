@@ -1,4 +1,7 @@
 *** Settings ***
+Resource    PO/ProductAdditionSuccessWindow.robot
+Resource    PO/DressProductPage.robot
+Resource    Po/DressesPage.robot
 Resource    PO/MyAccountPage.robot
 Resource    PO/CreateAccountPage.robot
 Resource    PO/HomePage.robot
@@ -45,4 +48,24 @@ Sign In Should Fail
     SignInPage.Fill Invalid User Info
     SignInPage.Sign In
     SignInPage.Verify Error Message
+
+Should Move To Home Page
+    MyAccountPage.Move To Home Page
+    HomePage.Verify Load
+
+Should Move To Dresses Page
+    HomePage.Click Dresses Link
+    DressesPage.Verify Load
+
+Should Choose Dress
+    DressesPage.Choose Dress
+    DressProductPage.Verify Load
+
+Should Add Dress To Cart
+    DressProductPage.Choose Dress Color
+    DressProductPage.Verify Availability
+    DressProductPage.Add To Cart
+    ProductAdditionSuccessWindow.Verify Appearance
+    ProductAdditionSuccessWindow.Continue Shopping
+
 
