@@ -1,6 +1,8 @@
 *** Settings ***
-Resource    LoginResources.robot
 Library    SeleniumLibrary
+
+*** Variables ***
+${BROWSER}                      firefox
 
 *** Keywords ***
 Begin Web Test
