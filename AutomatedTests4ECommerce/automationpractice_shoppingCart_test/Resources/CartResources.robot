@@ -2,12 +2,11 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-${URL}                              http://www.automationpractice.pl/index.php
 ${BROWSER}                          firefox
 
 &{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
 
-${SIGN_IN_LINK}                     xpath=//a[contains(text(),'Sign in')]
+
 ${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
 
 ${CREATE_EMAIL_FIELD}               xpath=//input[@id='email_create']

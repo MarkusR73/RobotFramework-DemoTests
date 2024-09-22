@@ -1,67 +1,28 @@
 *** Settings ***
 Resource    ../Resources/CartResources.robot
 Resource    ../Resources/CartKeywords.robot
+Resource    ../Resources/Common.robot
+Resource    ../Resources/Cart.robot
 Library     SeleniumLibrary
+Suite Setup    Common.Begin Web Test
+Suite Teardown    End Web Test
 
 # Run the script:
 # robot -d Results Tests/CartTests.robot
 
 *** Test Cases ***
 Registration
-    Generate User Information
-
-    Open Browser And Go To URL
-    Maximize Browser Window
-
-    # Wait until the sign-in button is visible and click it
-    Wait Until Page Contains Element   ${SIGN_IN_LINK} 
-    Click Element   ${SIGN_IN_LINK} 
-
-    # Wait until the "Create An Account" element appears on page
-    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
-
-    # Input email and click create account button
-    Input Text  ${CREATE_EMAIL_FIELD}   ${USER_INFORMATION.EMAIL}
-    Click Button   ${CREATE_AN_ACCOUNT_BUTTON}
-
-    # Wait until personal information form is visible
-    Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
-
-    # Select gender
-    Click Element   ${GENDER_SELECTOR_MR}
-    
-    # Verify that 'MR' is selected
-    ${Gender_Selector_Value}=    Get Element Attribute    ${GENDER_SELECTOR_MR}     checked
-    Should Be Equal As Strings    ${Gender_Selector_Value}    true
-
-    # Input user info into the form
-    Input Text  ${FIRSTNAME_FIELD}      ${USER_INFORMATION.FIRSTNAME}
-    Input Text  ${LASTNAME_FIELD}       ${USER_INFORMATION.LASTNAME}
-    Input Text  ${PASSWORD_FIELD}       ${USER_INFORMATION.PASSWORD}
-
-    # Select date of birth
-    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${USER_INFORMATION.BIRTHDAY}
-    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${USER_INFORMATION.BIRTH_MONTH}
-    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${USER_INFORMATION.BIRTH_YEAR}
-
-    # Complete registration
-    Click Button   ${REGISTER_BUTTON}
-
-    # Wait until the success message is visible
-    Wait Until Page Contains Element    ${SUCCESS_MESSAGE_REGISTRATION}
-
-    # Sign out
-    Click Element   ${SIGN_OUT_LINK}
-
-    # Wait until sign out process fully executed
-    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
-
-    Close Browser
+    User Information Should Be Generated
+    Home Page Should Load
+    Should Move To Sign In Page
+    Should Move To Create Account Form
+    Should Fill Personal Info
+    Should Complete Registration
+    Should Sign Out
 
 *** Test Cases ***
 Valid login
-    Open Browser And Go To URL
-    Maximize Browser Window
+    Home Page Should Load
 
     # Call sign in keyword
     Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
@@ -75,12 +36,9 @@ Valid login
     # Wait until sign out process Complete
     Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
-    Close Browser
-
 *** Test Cases ***
 Invalid login
-    Open Browser And Go To URL
-    Maximize Browser Window
+    Home Page Should Load
 
     # Call sign in keyword
     Try To Sign In  ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
@@ -88,12 +46,9 @@ Invalid login
     # Wait until error message is visible
     Wait Until Element Is Visible   ${INVALID_PASSWORD_ERROR}
 
-    Close Browser
-
 *** Test Cases ***
 Add Dress To Cart
-    Open Browser And Go To URL
-    Maximize Browser Window
+    Home Page Should Load
 
     # Call sign in keyword
     Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
@@ -227,5 +182,3 @@ Proceed To Checkout
     # Verify that the order confirmation message is displayed
     Wait Until Page Contains Element    ${ORDER_COMPLETE_MESSAGE}
     Element Text Should Be      ${ORDER_COMPLETE_MESSAGE}       Your order on My Shop is complete.
-
-    Close Browser

@@ -13,9 +13,6 @@ Generate User Information
     ${USER_INFORMATION.ADDRESS}=    Generate Random String
     ${USER_INFORMATION.CITY}=       Generate Random String
 
-Open Browser And Go To URL
-    Open Browser    ${URL}    ${BROWSER}
-
 Try To Sign In
     [Arguments]     ${email}    ${password}
     # Wait until page fully loaded
