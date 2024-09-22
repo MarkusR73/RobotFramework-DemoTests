@@ -1,8 +1,4 @@
 *** Settings ***
-Resource    SearchResources.robot
-Resource    SearchKeywords.robot
-Library    SeleniumLibrary
-Test Teardown    Close Browser
 Resource        ../Resources/Search.robot
 Resource        ../Resources/Common.robot
 Test Setup      Common.Begin Web Test
