@@ -11,10 +11,12 @@ Open Login Page
 Login With Credentials
     LoginPage.Login    ${USER_INFORMATION.USERNAME}    ${USER_INFORMATION.PASSWORD}
 
-Login With Invalid Credentials
-    LoginPage.Login    ${INVALID_USER_INFORMATION.USERNAME}    ${INVALID_USER_INFORMATION.PASSWORD}
-    LoginPage.Verify Login Error
-    
 Account Logout
     MyAccountPage.Logout
     AccountLogoutPage.VerifyLogout
+
+Login With Invalid Credentials
+    LoginPage.Login    ${INVALID_USER_INFORMATION.USERNAME}    ${INVALID_USER_INFORMATION.PASSWORD}
+
+Verify Login Failure
+    LoginPage.Verify Login Error
