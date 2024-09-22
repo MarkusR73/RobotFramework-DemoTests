@@ -40,14 +40,12 @@ ${SUCCESS_MESSAGE_PRODUCT_ADDED}    xpath=//h2[contains(., 'Product successfully
 ${CONTINUE_SHOPPING_LINK}           xpath=//span[@title='Continue shopping'] 
 ${HOME_ICON}                        xpath=//a[@title='Return to Home']
 
-${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
-${EXPECTED_COUNT}                   1 product
-${CART_LINK}                        xpath=//b[text()='Cart']
-${SUMMARY_TEXT}                     xpath=//h1[@id='cart_title']
-${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i
-${DRESS_LOCATOR}                    //tr[@id='product_6_40_0_0']
 
-${TOTAL_PRICE}                      id=total_price
+
+
+
+
+
 
 ${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
 ${YOUR_ADDRESSES_HEADER}            xpath=//h1[text()='Your addresses']

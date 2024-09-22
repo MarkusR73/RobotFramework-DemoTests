@@ -52,28 +52,12 @@ Add Blouse To Cart
     Should Move To Home Page
 
 Remove from Cart
-    # Wait until the shopping cart icon is visible, then enter the cart
-    Wait Until Page Contains Element   ${CART_LINK} 
-    Click Element   ${CART_LINK} 
-
-    # Wait until the page is fully loaded, then remove the dress from the cart
-    Wait Until Page Contains Element   ${SUMMARY_TEXT}
-    Wait Until Element Is Enabled   ${DELETE_ICON_DRESS}
-    Click Or Scroll     ${DELETE_ICON_DRESS}
-    
-    # Wait until the dress is removed from the cart and verify
-    Wait Until Element Is Not Visible   ${DRESS_LOCATOR}
-    Wait Until Expected Value Is Visible    ${EXPECTED_COUNT}   ${PRODUCT_COUNT_ELEMENT}
+    Home Page Should Load
+    Should Move To Cart Page
+    Should Remove Dress From Cart
 
 Verify Total Price
-    # Wait for the total price element to be visible
-    Wait Until Element Is Visible   ${TOTAL_PRICE}
-
-    # Get the text inside the total price span
-    ${total_price_value}=    Get Text    ${TOTAL_PRICE}
-
-    # Verify the total price value
-    Should Be Equal    ${total_price_value}    $34
+    Total Price Should Equal
 
 Proceed To Checkout
     # Wait for the checkout link to be visible and click it to proceed 

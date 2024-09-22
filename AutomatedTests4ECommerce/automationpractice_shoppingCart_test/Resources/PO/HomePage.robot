@@ -7,6 +7,7 @@ ${HOMEPAGE_SLIDER}                  //div[@id='homepage-slider']
 ${SIGN_IN_LINK}                     xpath=//a[contains(text(),'Sign in')]
 ${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
 ${WOMEN_LINK}                       xpath=//a[@title="Women"]
+${CART_LINK}                        xpath=//b[text()='Cart']
 
 *** Keywords ***
 Open Page
@@ -23,3 +24,6 @@ Click Dresses Link
 
 Click Women Link
     Click Element   ${WOMEN_LINK}
+
+Click Cart Link
+    Click Element   ${CART_LINK}
