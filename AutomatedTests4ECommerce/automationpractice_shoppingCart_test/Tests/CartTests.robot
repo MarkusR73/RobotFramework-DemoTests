@@ -23,28 +23,15 @@ Registration
 *** Test Cases ***
 Valid login
     Home Page Should Load
-
-    # Call sign in keyword
-    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
-
-    # Wait until "my account" header is visible
-    Wait Until Element Is Visible   ${MY_ACCOUNT_HEADER}
-
-    #Sign out
-    Click Element   ${SIGN_OUT_LINK}
-
-    # Wait until sign out process Complete
-    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
+    Should Move To Sign In Page
+    Sign In Should Succeed
+    Should Sign Out
 
 *** Test Cases ***
 Invalid login
     Home Page Should Load
-
-    # Call sign in keyword
-    Try To Sign In  ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
-
-    # Wait until error message is visible
-    Wait Until Element Is Visible   ${INVALID_PASSWORD_ERROR}
+    Should Move To Sign In Page
+    Sign In Should Fail
 
 *** Test Cases ***
 Add Dress To Cart

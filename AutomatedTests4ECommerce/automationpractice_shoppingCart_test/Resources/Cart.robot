@@ -30,9 +30,19 @@ Should Fill Personal Info
 
 Should Complete Registration
     CreateAccountPage.Click Register
-    MyAccountPage.Verify Load
+    MyAccountPage.Verify Registration
 
 Should Sign Out
     MyAccountPage.Sign Out
     SignInPage.Verify Load
+
+Sign In Should Succeed
+    SignInPage.Fill Valid User Info
+    SignInPage.Sign In
+    MyAccountPage.Verify Sign In
+
+Sign In Should Fail
+    SignInPage.Fill Invalid User Info
+    SignInPage.Sign In
+    SignInPage.Verify Error Message
 
