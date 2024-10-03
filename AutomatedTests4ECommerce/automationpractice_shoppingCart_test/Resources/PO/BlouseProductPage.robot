@@ -2,9 +2,9 @@
 Library     SeleniumLibrary
 
 *** Variables ***
-${PRODUCT_REFERENCE_BLOUSE}         xpath=//span[text()='demo_2']
-${COLOR_WHITE}                      id=color_8
-${ADD_TO_CART_ELEMENT}              xpath=//p[@id='add_to_cart']/button
+${PRODUCT_REFERENCE_BLOUSE}             xpath=//span[text()='demo_2']
+${COLOR_WHITE}                          id=color_8
+${ADD_TO_CART_ELEMENT}                  xpath=//p[@id='add_to_cart']/button
 
 *** Keywords ***
 Verify Load

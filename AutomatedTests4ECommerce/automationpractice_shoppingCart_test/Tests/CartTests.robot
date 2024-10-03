@@ -1,6 +1,4 @@
 *** Settings ***
-Resource    ../Resources/CartResources.robot
-Resource    ../Resources/CartKeywords.robot
 Resource    ../Resources/Common.robot
 Resource    ../Resources/Cart.robot
 Library     SeleniumLibrary
@@ -60,47 +58,10 @@ Verify Total Price
     Total Price Should Equal
 
 Proceed To Checkout
-    # Wait for the checkout link to be visible and click it to proceed 
-    Wait Until Element Is Visible   ${CHECKOUT_LINK}
-    Click Element   ${CHECKOUT_LINK}
-
-    # Wait for the address info header to appear before filling out the address form
-    Wait Until Page Contains Element   ${YOUR_ADDRESSES_HEADER} 
-    Input Text                          ${ADDRESS_FIELD}            ${USER_INFORMATION.ADDRESS}
-    Input Text                          ${CITY_FIELD}               ${USER_INFORMATION.CITY}
-    Select From List By Value           ${STATE_LIST}               ${USER_INFORMATION.STATE}
-    Input Text                          ${POSTCODE_FIELD}           ${USER_INFORMATION.POSTCODE}
-    Select From List By Value           ${COUNTRY_LIST}             ${USER_INFORMATION.COUNTRY}
-    Input Text                          ${HOME_PHONE_FIELD}         ${USER_INFORMATION.PHONE_NUM}
-    Click Button   ${SAVE_BUTTON}
-
-    # Wait until the address delivery section is visible, 
-    Wait Until Page Contains Element    ${CHECKBOX_DELIVERY_ADDRESS}
-
-    # Verify that the "Use delivery address as the billing address"-box is checked and click the "Proceed"-button
-    ${Checkbox1_value}=             Get Element Attribute       ${CHECKBOX_DELIVERY_ADDRESS}    class
-    Should Be Equal As Strings      ${Checkbox1_value}          checked
-    Click Or Scroll                 ${PROCEED_TO_CHECKOUT_BUTTON}
-
-    # Wait for the terms and conditions checkbox to be visible and click it
-    Wait Until Page Contains Element    ${AGREE_TERMS_CHECKBOX}
-    Click Element   ${AGREE_TERMS_CHECKBOX}
-
-    # Click the button to proceed 
-    Click Element   ${PROCEED_TO_CHECKOUT_BUTTON}
-
-    # Validate total price and log the result
-    ${total_price}=                         Get Text            ${TOTAL_PRICE}
-    Run Keyword And Continue On Failure     Should Be Equal     ${total_price}    $34
-    Log    Total price is: ${total_price}
-
-    # Click the "Pay by check" option to proceed with payment
-    Click Element    ${PAY_BY_CHECK_ELEMENT} 
-
-    # Wait for the "Confirm my order" button to be visible and click it
-    Wait Until Page Contains Element    ${CONFIRM_MY_ORDER_BUTTON}
-    Click Element   ${CONFIRM_MY_ORDER_BUTTON}
-
-    # Verify that the order confirmation message is displayed
-    Wait Until Page Contains Element    ${ORDER_COMPLETE_MESSAGE}
-    Element Text Should Be      ${ORDER_COMPLETE_MESSAGE}       Your order on My Shop is complete.
+    Should Move From Summary To Address Step
+    Should Fill And Save Address Information
+    Should Verify Billing Address And Move To Shipping
+    Should Check Terms Of Service And Move to Payment
+    Should Verify Total Price
+    Should Choose Payment Method And Move To Confirmation
+    Order Should Be Completed

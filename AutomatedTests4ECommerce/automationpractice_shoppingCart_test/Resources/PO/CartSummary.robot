@@ -9,6 +9,7 @@ ${DRESS_LOCATOR}                    //tr[@id='product_6_40_0_0']
 ${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
 ${EXPECTED_COUNT}                   1 product
 ${TOTAL_PRICE}                      id=total_price
+${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
 
 *** Keywords ***
 Verify Load
@@ -27,3 +28,9 @@ Price Should Be Visible
 Verify Total Price
     ${total_price_value}=    Get Text    ${TOTAL_PRICE}
     Should Be Equal    ${total_price_value}    $34
+
+Proceed Link Should Be Visible
+    Wait Until Element Is Visible   ${CHECKOUT_LINK}
+
+Click Proceed Link
+    Click Element   ${CHECKOUT_LINK}

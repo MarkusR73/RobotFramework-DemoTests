@@ -1,5 +1,4 @@
 *** Settings ***
-Resource    ../CartResources.robot
 Library     SeleniumLibrary
 
 *** Variables ***

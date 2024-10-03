@@ -1,15 +1,14 @@
 *** Settings ***
-Resource    ../CartResources.robot
+Resource    ../Common.robot
 Library     SeleniumLibrary
 
 *** Variables ***
 ${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
 ${CREATE_EMAIL_FIELD}               xpath=//input[@id='email_create']
-
 ${LOGIN_EMAIL_FIELD}                id=email
 ${LOGIN_PASSWORD_FIELD}             id=passwd
 ${LOCK_ICON}                        id=SubmitLogin
-
+${WRONG_PASSWORD}                   wrong
 ${INVALID_PASSWORD_ERROR}           xpath=//p[text()='There is 1 error']
 
 *** Keywords ***

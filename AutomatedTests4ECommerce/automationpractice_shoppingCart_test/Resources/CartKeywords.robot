@@ -1,7 +1,9 @@
 *** Settings ***
-Resource    CartResources.robot
-Library    RandomRegistration.py
-Library    SeleniumLibrary
+Resource    PO/HomePage.robot
+Resource    PO/SignInPage.robot
+Resource    Common.robot
+Library     RandomRegistration.py
+Library     SeleniumLibrary
 
 *** Keywords ***
 Generate User Information

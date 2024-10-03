@@ -1,4 +1,9 @@
 *** Settings ***
+Resource    PO/CartConfirmation.robot
+Resource    PO/CartPayment.robot
+Resource    PO/CartShipping.robot
+Resource    PO/CartAddress.robot
+Resource    PO/YourAddresses.robot
 Resource    PO/CartSummary.robot
 Resource    PO/BlouseProductPage.robot
 Resource    PO/WomenPage.robot
@@ -98,4 +103,34 @@ Total Price Should Equal
     CartSummary.Price Should Be Visible
     CartSummary.Verify Total Price
 
+Should Move From Summary To Address Step
+    CartSummary.Proceed Link Should Be Visible
+    CartSummary.Click Proceed Link
+    YourAddresses.Verify Load
 
+Should Fill And Save Address Information
+    YourAddresses.Fill Address Info
+    YourAddresses.Save Address Info
+
+Should Verify Billing Address And Move To Shipping
+    CartAddress.Verify Load
+    CartAddress.Verify Billing Address
+    CartAddress.Move To Shipping
+
+Should Check Terms Of Service And Move to Payment
+    CartShipping.Verify Load
+    CartShipping.Check Terms Box
+    CartShipping.Move To Payment
+    CartPayment.Verify Load
+
+Should Verify Total Price
+    CartPayment.Validate Total Price
+    CartPayment.Log The Result
+
+Should Choose Payment Method And Move To Confirmation
+    CartPayment.Choose Payment Method
+    CartConfirmation.Verify Load
+
+Order Should Be Completed
+    CartConfirmation.Confirm Order
+    CartConfirmation.Verify Confirmation Success

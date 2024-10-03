@@ -3,6 +3,8 @@ Library    SeleniumLibrary
 
 *** Variables ***
 ${BROWSER}                      firefox
+&{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
+
 
 *** Keywords ***
 Begin Web Test
