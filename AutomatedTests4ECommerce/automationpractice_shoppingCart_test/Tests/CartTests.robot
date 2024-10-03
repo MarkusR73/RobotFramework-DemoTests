@@ -1,9 +1,9 @@
 *** Settings ***
-Resource    ../Resources/Common.robot
-Resource    ../Resources/Cart.robot
-Library     SeleniumLibrary
-Suite Setup    Common.Begin Web Test
-Suite Teardown    End Web Test
+Resource            ../Resources/Common.robot
+Resource            ../Resources/CartApp.robot
+
+Suite Setup         Common.Begin Web Test
+Suite Teardown      Common.End Web Test
 
 # Run the script:
 # robot -d Results Tests/CartTests.robot

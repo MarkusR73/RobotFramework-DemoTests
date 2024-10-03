@@ -1,7 +1,6 @@
 *** Settings ***
-Resource    /CartSummary.robot
+Resource    CartSummary.robot
 Resource    ../Common.robot
-Resource    ../CartKeywords.robot
 Library    SeleniumLibrary
 
 *** Variables ***

@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../CartKeywords.robot
+Resource    ../Common.robot
 Library    SeleniumLibrary
 
 *** Variables ***
@@ -15,4 +15,4 @@ Verify Billing Address
     Should Be Equal As Strings      ${Checkbox1_value}          checked
 
 Move To Shipping
-    Click Or Scroll                 ${PROCEED_TO_CHECKOUT_BUTTON}
+    Common.Click Or Scroll                 ${PROCEED_TO_CHECKOUT_BUTTON}

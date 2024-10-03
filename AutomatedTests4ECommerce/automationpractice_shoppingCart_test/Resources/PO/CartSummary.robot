@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../CartKeywords.robot
+Resource    ../Common.robot
 Library     SeleniumLibrary
 
 *** Variables ***
@@ -16,11 +16,11 @@ Verify Load
     Wait Until Page Contains Element   ${SUMMARY_TEXT}
 
 Remove Dress
-    Click Or Scroll     ${DELETE_ICON_DRESS}
+    Common.Click Or Scroll     ${DELETE_ICON_DRESS}
 
 Verify Dress Disappearance
     Wait Until Element Is Not Visible   ${DRESS_LOCATOR}
-    Wait Until Expected Value Is Visible    ${EXPECTED_COUNT}   ${PRODUCT_COUNT_ELEMENT}
+    Common.Wait Until Expected Value Is Visible    ${EXPECTED_COUNT}   ${PRODUCT_COUNT_ELEMENT}
 
 Price Should Be Visible
     Wait Until Element Is Visible   ${TOTAL_PRICE}
