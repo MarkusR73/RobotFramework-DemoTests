@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    PO/CartPage.robot
+Resource    PO/CartSummary.robot
 Resource    PO/BlouseProductPage.robot
 Resource    PO/WomenPage.robot
 Resource    PO/ProductAdditionSuccessWindow.robot
@@ -88,14 +88,14 @@ Should Add Blouse To Cart
 
 Should Move To Cart Page
     HomePage.Click Cart Link
-    CartPage.Verify Load
+    CartSummary.Verify Load
 
 Should Remove Dress From Cart
-    CartPage.Remove Dress
-    CartPage.Verify Dress Disappearance
+    CartSummary.Remove Dress
+    CartSummary.Verify Dress Disappearance
 
 Total Price Should Equal
-    CartPage.Price Should Be Visible
-    CartPage.Verify Total Price
+    CartSummary.Price Should Be Visible
+    CartSummary.Verify Total Price
 
 
