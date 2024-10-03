@@ -1,6 +1,4 @@
 *** Settings ***
-#Resource    PO/Home.robot
-#Resource    PO/SignIn.robot
 Library     RandomRegistration.py
 Library     SeleniumLibrary
 
