@@ -39,6 +39,14 @@ Invalid Sign In
     SignIn.Try To Sign In
     SignIn.Verify Error Message
 
+Execute Search
+    Home.Input Search Term
+    Home.Execute Search
+
+Verify Search Results
+    ProductListing.Verify Search Listing Load
+    ProductListing.Verify Result Count
+
 View Dress Listing
     Home.Click Dresses Link
     ProductListing.Verify Dress Listing Load

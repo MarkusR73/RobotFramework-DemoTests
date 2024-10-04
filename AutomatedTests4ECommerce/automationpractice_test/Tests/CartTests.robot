@@ -16,18 +16,19 @@ New User Can Create An Account
     CartApp.Create New Account
     CartApp.Sign Out
 
-*** Test Cases ***
 Valid User Can Sign In
     CartApp.Go To Sign In Page
     CartApp.Valid Sign In
     CartApp.Sign Out
 
-*** Test Cases ***
 Can't Sign In With Wrong Password
     CartApp.Go To Sign In Page
     CartApp.Invalid Sign In
 
-*** Test Cases ***
+User Can Search For Products
+    CartApp.Execute Search
+    CartApp.Verify Search Results
+
 Can Add Dress To Cart
     CartApp.Go To Sign In Page
     CartApp.Valid Sign In
