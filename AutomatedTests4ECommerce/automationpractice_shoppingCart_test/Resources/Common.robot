@@ -1,11 +1,12 @@
 *** Settings ***
+Resource    PO/Home.robot
 Library     RandomRegistration.py
 Library     SeleniumLibrary
 
 *** Variables ***
-${BROWSER}                      firefox
+${BROWSER}              firefox
 &{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
-
+${HOME_ICON}            xpath=//a[@title='Return to Home']
 
 *** Keywords ***
 Begin Web Test
@@ -14,6 +15,12 @@ Begin Web Test
 
 End Web Test
     Close Browser
+
+Begin Test Case
+    Home.Open Page
+
+Go Home
+    Click Link    ${HOME_ICON}
 
 Generate User Information
     ${USER_INFORMATION.EMAIL}=      Generate Random Email

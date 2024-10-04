@@ -15,6 +15,10 @@ ${INVALID_PASSWORD_ERROR}           xpath=//p[text()='There is 1 error']
 Verify Load
     Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
 
+Begin Account Creation
+    Input Email Address
+    Click Create Account Button
+
 Input Email Address
     Input Text  ${CREATE_EMAIL_FIELD}   ${USER_INFORMATION.EMAIL}
 
@@ -29,7 +33,7 @@ Fill Invalid User Info
     Input Text  ${LOGIN_EMAIL_FIELD}        ${USER_INFORMATION.EMAIL}
     Input Text  ${LOGIN_PASSWORD_FIELD}     ${WRONG_PASSWORD}
 
-Sign In
+Try To Sign In
     Click Element   ${LOCK_ICON}
 
 Verify Error Message

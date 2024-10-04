@@ -4,64 +4,53 @@ Resource            ../Resources/CartApp.robot
 
 Suite Setup         Common.Begin Web Test
 Suite Teardown      Common.End Web Test
+Test Setup          Common.Begin Test Case
 
 # Run the script:
 # robot -d Results Tests/CartTests.robot
 
 *** Test Cases ***
-Registration
-    User Information Should Be Generated
-    Home Page Should Load
-    Should Move To Sign In Page
-    Should Move To Create Account Form
-    Should Fill Personal Info
-    Should Complete Registration
-    Should Sign Out
+New User Can Create An Account
+    Common.Generate User Information
+    CartApp.Go To Sign In Page
+    CartApp.Create New Account
+    CartApp.Sign Out
 
 *** Test Cases ***
-Valid login
-    Home Page Should Load
-    Should Move To Sign In Page
-    Sign In Should Succeed
-    Should Sign Out
+Valid User Can Sign In
+    CartApp.Go To Sign In Page
+    CartApp.Valid Sign In
+    CartApp.Sign Out
 
 *** Test Cases ***
-Invalid login
-    Home Page Should Load
-    Should Move To Sign In Page
-    Sign In Should Fail
+Can't Sign In With Wrong Password
+    CartApp.Go To Sign In Page
+    CartApp.Invalid Sign In
 
 *** Test Cases ***
-Add Dress To Cart
-    Home Page Should Load
-    Should Move To Sign In Page
-    Sign In Should Succeed
-    Should Move To Home Page
-    Should Move To Dresses Page
-    Should Choose Dress
-    Should Add Dress To Cart
-    Should Move To Home Page
+Can Add Dress To Cart
+    CartApp.Go To Sign In Page
+    CartApp.Valid Sign In
+    Common.Go Home
+    CartApp.View Dress Listing
+    CartApp.Choose Dress
+    CartApp.Add Dress To Cart
 
-Add Blouse To Cart
-    Home Page Should Load
-    Should Move To Women Page
-    Should Choose Blouse
-    Should Add Blouse To Cart
-    Should Move To Home Page
+Can Add Blouse To Cart
+    CartApp.View Women Page
+    CartApp.Choose Blouse
+    CartApp.Add Blouse To Cart
 
-Remove from Cart
-    Home Page Should Load
-    Should Move To Cart Page
-    Should Remove Dress From Cart
+Can Remove Product from Cart
+    CartApp.Go To Cart Page
+    CartApp.Remove Dress From Cart
 
-Verify Total Price
-    Total Price Should Equal
-
-Proceed To Checkout
-    Should Move From Summary To Address Step
-    Should Fill And Save Address Information
-    Should Verify Billing Address And Move To Shipping
-    Should Check Terms Of Service And Move to Payment
-    Should Verify Total Price
-    Should Choose Payment Method And Move To Confirmation
-    Order Should Be Completed
+Can Proceed To Checkout
+    CartApp.Go To Cart Page
+    CartApp.Move To Address Step
+    CartApp.Fill And Save Address Information
+    CartApp.Verify Billing Address And Move To Shipping
+    CartApp.Check Terms Of Service And Move to Payment
+    CartApp.Verify Total Price
+    CartApp.Choose Payment Method And Move To Confirmation
+    CartApp.Confirm Order

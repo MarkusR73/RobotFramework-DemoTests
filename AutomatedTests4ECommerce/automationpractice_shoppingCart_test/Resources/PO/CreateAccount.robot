@@ -17,16 +17,22 @@ ${REGISTER_BUTTON}                  id=submitAccount
 Verify Load
     Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
 
+Fill User Information
+    Select Gender
+    Input Name Information
+    Input Password
+    Select Date Of Birth
+
 Select Gender
     Click Element   ${GENDER_SELECTOR_MR}
     ${Gender_Selector_Value}=    Get Element Attribute    ${GENDER_SELECTOR_MR}     checked
     Should Be Equal As Strings    ${Gender_Selector_Value}    true
 
-Fill Name Information
+Input Name Information
     Input Text  ${FIRSTNAME_FIELD}      ${USER_INFORMATION.FIRSTNAME}
     Input Text  ${LASTNAME_FIELD}       ${USER_INFORMATION.LASTNAME}
 
-Select Password
+Input Password
      Input Text  ${PASSWORD_FIELD}       ${USER_INFORMATION.PASSWORD}
 
 Select Date Of Birth
