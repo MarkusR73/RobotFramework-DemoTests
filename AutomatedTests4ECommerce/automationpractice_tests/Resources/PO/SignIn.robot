@@ -25,15 +25,10 @@ Input Email Address
 Click Create Account Button
     Click Button   ${CREATE_AN_ACCOUNT_BUTTON}
 
-Fill Valid User Info
-    Input Text  ${LOGIN_EMAIL_FIELD}        ${USER_INFORMATION.EMAIL}
-    Input Text  ${LOGIN_PASSWORD_FIELD}     ${USER_INFORMATION.PASSWORD}
-
-Fill Invalid User Info
-    Input Text  ${LOGIN_EMAIL_FIELD}        ${USER_INFORMATION.EMAIL}
-    Input Text  ${LOGIN_PASSWORD_FIELD}     ${WRONG_PASSWORD}
-
 Try To Sign In
+    [Arguments]     ${email}    ${password}
+    Input Text      ${LOGIN_EMAIL_FIELD}        ${email}
+    Input Text      ${LOGIN_PASSWORD_FIELD}     ${password}
     Click Element   ${LOCK_ICON}
 
 Verify Error Message

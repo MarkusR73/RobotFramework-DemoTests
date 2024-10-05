@@ -30,13 +30,11 @@ Sign Out
     SignIn.Verify Load
 
 Valid Sign In
-    SignIn.Fill Valid User Info
-    SignIn.Try To Sign In
+    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
     MyAccount.Verify Sign In
 
 Invalid Sign In
-    SignIn.Fill Invalid User Info
-    SignIn.Try To Sign In
+    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
     SignIn.Verify Error Message
 
 Execute Search
