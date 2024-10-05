@@ -9,13 +9,14 @@ Resource    PO/Product.robot
 Resource    Po/ProductListing.robot
 Resource    PO/MyAccount.robot
 Resource    PO/CreateAccount.robot
+Resource    PO/NavBar.robot
 Resource    PO/Home.robot
 Resource    PO/SignIn.robot
 Resource    Common.robot
 
 *** Keywords ***
 Go To Sign In Page
-    Home.Click Sign In Link
+    NavBar.Click Sign In Link
     SignIn.Verify Load
 
 Create New Account
@@ -38,15 +39,15 @@ Invalid Sign In
     SignIn.Verify Error Message
 
 Execute Search
-    Home.Input Search Term
-    Home.Execute Search
+    NavBar.Input Search Term      ${SEARCH_TERM}
+    NavBar.Execute Search
 
 Verify Search Results
     ProductListing.Verify Search Listing Load
     ProductListing.Verify Result Count
 
 View Dress Listing
-    Home.Click Dresses Link
+    NavBar.Click Dresses Link
     ProductListing.Verify Dress Listing Load
 
 Choose Dress
@@ -61,7 +62,7 @@ Add Dress To Cart
     Product.Continue Shopping
 
 View Women Page
-    Home.Click Women Link
+    NavBar.Click Women Link
     ProductListing.Verify Blouse Listing Load
 
 Choose Blouse
@@ -76,7 +77,7 @@ Add Blouse To Cart
     Product.Continue Shopping
 
 Go To Cart Page
-    Home.Click Cart Link
+    NavBar.Click Cart Link
     CartSummary.Verify Load
 
 Remove Dress From Cart
