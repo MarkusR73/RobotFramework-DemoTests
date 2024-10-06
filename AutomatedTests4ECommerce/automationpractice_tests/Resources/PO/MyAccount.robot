@@ -2,14 +2,14 @@
 Library     SeleniumLibrary
 
 *** Variables ***
-${SUCCESS_MESSAGE_REGISTRATION}     xpath=//p[contains(text(),'Your account has been created.')]
-${SIGN_OUT_LINK}                    xpath=//a[@class='logout']
-${MY_ACCOUNT_HEADER}                xpath=//h1[text()='My account']
-${HOME_ICON}                        xpath=//a[@title='Return to Home']
+${ACCOUNT_CREATION_SUCCESS_MESSAGE}     xpath=//p[contains(text(),'Your account has been created.')]
+${SIGN_OUT_LINK}                        xpath=//a[@class='logout']
+${MY_ACCOUNT_HEADER}                    xpath=//h1[text()='My account']
+
 
 *** Keywords ***
-Verify Registration
-    Wait Until Page Contains Element    ${SUCCESS_MESSAGE_REGISTRATION}
+Verify Success Of Account Creation
+    Wait Until Page Contains Element    ${ACCOUNT_CREATION_SUCCESS_MESSAGE}
 
 Verify Sign In
     Wait Until Page Contains Element    ${MY_ACCOUNT_HEADER}
@@ -17,5 +17,3 @@ Verify Sign In
 Sign Out
     Click Element   ${SIGN_OUT_LINK}
 
-Move To Home Page
-    Click Element   ${HOME_ICON}

@@ -16,15 +16,15 @@ Resource    Common.robot
 
 *** Keywords ***
 Go To Sign In Page
-    NavBar.Click Sign In Link
-    SignIn.Verify Load
+    NavBar.Click Bar Element    ${SIGN_IN_LINK}
+    SignIn.Verify Page Loaded
 
 Create New Account
     SignIn.Begin Account Creation
-    CreateAccount.Verify Load
+    CreateAccount.Verify Page Loaded
     CreateAccount.Fill User Information
-    CreateAccount.Click Register
-    MyAccount.Verify Registration
+    CreateAccount.Submit Account Information
+    MyAccount.Verify Success Of Account Creation
 
 Valid Sign In
     Go To Sign In Page
@@ -38,7 +38,7 @@ Invalid Sign In
 
 Sign Out
     MyAccount.Sign Out
-    SignIn.Verify Load
+    SignIn.Verify Page Loaded
 
 Execute Search
     NavBar.Input Search Term      ${SEARCH_TERM}

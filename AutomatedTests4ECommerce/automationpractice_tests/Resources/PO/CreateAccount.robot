@@ -4,7 +4,7 @@ Library     SeleniumLibrary
 
 *** Variables ***
 ${REGISTRATION_FORM_HEADER}         xpath=//h3[contains(text(),'Your personal information')]
-${GENDER_SELECTOR_MR}               id=id_gender1
+${GENDER_MR_CHECKBOX}               id=id_gender1
 ${FIRSTNAME_FIELD}                  id=customer_firstname
 ${LASTNAME_FIELD}                   id=customer_lastname
 ${PASSWORD_FIELD}                   id=passwd
@@ -14,31 +14,33 @@ ${BIRTH_YEAR_SELECTOR}              id=years
 ${REGISTER_BUTTON}                  id=submitAccount
 
 *** Keywords ***
-Verify Load
+Verify Page Loaded
     Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
 
 Fill User Information
-    Select Gender
-    Input Name Information
-    Input Password
-    Select Date Of Birth
+    Select Gender               ${GENDER_MR_CHECKBOX}
+    Input Name Information      ${USER_INFORMATION.FIRSTNAME}       ${USER_INFORMATION.LASTNAME}
+    Input Password              ${USER_INFORMATION.PASSWORD}
+    Select Date Of Birth        ${USER_INFORMATION.BIRTHDAY}        ${USER_INFORMATION.BIRTH_MONTH}     ${USER_INFORMATION.BIRTH_YEAR}
 
 Select Gender
-    Click Element   ${GENDER_SELECTOR_MR}
-    ${Gender_Selector_Value}=    Get Element Attribute    ${GENDER_SELECTOR_MR}     checked
-    Should Be Equal As Strings    ${Gender_Selector_Value}    true
+    [Arguments]     ${locator}
+    Click Element   ${locator}
 
 Input Name Information
-    Input Text  ${FIRSTNAME_FIELD}      ${USER_INFORMATION.FIRSTNAME}
-    Input Text  ${LASTNAME_FIELD}       ${USER_INFORMATION.LASTNAME}
+    [Arguments]     ${first_name}   ${last_name}
+    Input Text  ${FIRSTNAME_FIELD}      ${first_name}
+    Input Text  ${LASTNAME_FIELD}       ${last_name}
 
 Input Password
-     Input Text  ${PASSWORD_FIELD}       ${USER_INFORMATION.PASSWORD}
+    [Arguments]     ${password}
+     Input Text  ${PASSWORD_FIELD}       ${password}
 
 Select Date Of Birth
-    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${USER_INFORMATION.BIRTHDAY}
-    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${USER_INFORMATION.BIRTH_MONTH}
-    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${USER_INFORMATION.BIRTH_YEAR}
+    [Arguments]     ${day}   ${month}   ${year}
+    Select From List By Value    ${BIRTHDAY_SELECTOR}       ${day}
+    Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${month}
+    Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${year}
 
-Click Register
+Submit Account Information
     Click Button   ${REGISTER_BUTTON}

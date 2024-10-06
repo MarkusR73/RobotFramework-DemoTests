@@ -3,6 +3,7 @@ Resource    ../Common.robot
 Library     SeleniumLibrary
 
 *** Variables ***
+${AUTHENTICATION_MAIN_HEADING}      xpath=//h1[text()='Authentication']
 ${CREATE_AN_ACCOUNT_BUTTON}         xpath=//button[@id='SubmitCreate']
 ${CREATE_EMAIL_FIELD}               xpath=//input[@id='email_create']
 ${LOGIN_EMAIL_FIELD}                id=email
@@ -12,8 +13,8 @@ ${WRONG_PASSWORD}                   wrong
 ${INVALID_PASSWORD_ERROR}           xpath=//p[text()='There is 1 error']
 
 *** Keywords ***
-Verify Load
-    Wait Until Page Contains Element   ${CREATE_AN_ACCOUNT_BUTTON}
+Verify Page Loaded
+    Wait Until Page Contains Element   ${AUTHENTICATION_MAIN_HEADING}
 
 Begin Account Creation
     Input Email Address

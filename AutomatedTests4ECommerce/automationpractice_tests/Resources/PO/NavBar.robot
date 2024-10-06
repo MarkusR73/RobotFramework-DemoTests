@@ -8,11 +8,14 @@ ${SEARCH_BUTTON}                    xpath=//button[@type='submit']
 ${DRESSES_LINK}                     xpath=//div[6]/ul/li[2]/a[@title='Dresses']
 ${WOMEN_LINK}                       xpath=//a[@title="Women"]
 ${CART_LINK}                        xpath=//b[text()='Cart']
-${HOME_ICON}            xpath=//a[@title='Return to Home']
+${HOME_ICON}                        xpath=//a[@title='Return to Home']
 
 ${SEARCH_TERM}                      dress
 
 *** Keywords ***
+Move To Home Page
+    Click Element   ${HOME_ICON}
+
 Click Bar Element
     [Arguments]     ${bar_element}
     Click Element    ${bar_element}

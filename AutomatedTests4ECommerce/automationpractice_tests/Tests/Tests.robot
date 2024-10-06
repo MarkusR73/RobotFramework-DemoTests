@@ -10,7 +10,7 @@ Test Setup          Common.Begin Test Case
 # robot -d Results Tests/Tests.robot
 
 *** Test Cases ***
-New User Can Create An Account
+New User Should Be Able To Create An Account
     Common.Generate User Information
     TestApp.Go To Sign In Page
     TestApp.Create New Account
