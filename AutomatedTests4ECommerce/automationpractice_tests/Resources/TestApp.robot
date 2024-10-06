@@ -26,17 +26,19 @@ Create New Account
     CreateAccount.Click Register
     MyAccount.Verify Registration
 
-Sign Out
-    MyAccount.Sign Out
-    SignIn.Verify Load
-
 Valid Sign In
+    Go To Sign In Page
     SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
     MyAccount.Verify Sign In
 
 Invalid Sign In
+    Go To Sign In Page
     SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
     SignIn.Verify Error Message
+
+Sign Out
+    MyAccount.Sign Out
+    SignIn.Verify Load
 
 Execute Search
     NavBar.Input Search Term      ${SEARCH_TERM}
@@ -46,30 +48,29 @@ Verify Search Results
     ProductListing.Verify Search Listing Load
     ProductListing.Verify Result Count
 
-View Dress Listing
-    NavBar.Click Dresses Link
-    ProductListing.Verify Dress Listing Load
+Move To Dress Listing
+    Move To Product Listing     ${DRESSES_LINK}     ${DRESSES_HEADER}
 
 Choose Dress
-    ProductListing.Choose Dress
-    Product.Verify Dress Page Load
+    Move To Product Page        ${CHOSEN_DRESS}     ${PRODUCT_REFERENCE_DRESS}
 
-Add Dress To Cart
-    Product.Choose Color
-    Product.Verify Availability
-    Product.Add To Cart
-    Product.Verify Successful Addition
-    Product.Continue Shopping
-
-View Women Page
-    NavBar.Click Women Link
-    ProductListing.Verify Blouse Listing Load
+Move To Women Listing
+    Move To Product Listing     ${WOMEN_LINK}     ${WOMEN_HEADER}
 
 Choose Blouse
-    ProductListing.Choose Blouse
-    Product.Verify Blouse Page Load
+    Move To Product Page        ${CHOSEN_BLOUSE}    ${PRODUCT_REFERENCE_BLOUSE}
 
-Add Blouse To Cart
+Move To Product Listing
+    [Arguments]     ${bar_element}  ${landing_page_element}
+    NavBar.Click Bar Element        ${bar_element}
+    ProductListing.Verify Load      ${landing_page_element}
+
+Move To Product Page
+    [Arguments]     ${product}  ${landing_page_element}
+    ProductListing.Choose Product   ${product}
+    Product.Verify Load             ${landing_page_element}
+
+Add Product To Cart
     Product.Choose Color
     Product.Verify Availability
     Product.Add To Cart
@@ -81,8 +82,7 @@ Go To Cart Page
     CartSummary.Verify Load
 
 Remove Dress From Cart
-    CartSummary.Remove Dress
-    CartSummary.Verify Dress Disappearance
+    CartSummary.Remove Product        ${DELETE_ICON_DRESS}     ${DRESS_LOCATOR}
 
 Move To Address Step
     CartSummary.Proceed Link Should Be Visible

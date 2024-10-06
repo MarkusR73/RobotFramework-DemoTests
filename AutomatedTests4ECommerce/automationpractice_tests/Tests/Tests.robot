@@ -17,7 +17,6 @@ New User Can Create An Account
     TestApp.Sign Out
 
 Valid User Can Sign In
-    TestApp.Go To Sign In Page
     TestApp.Valid Sign In
     TestApp.Sign Out
 
@@ -26,21 +25,19 @@ Can't Sign In With Wrong Password
     TestApp.Invalid Sign In
 
 User Can Search For Products
+    TestApp.Valid Sign In
     TestApp.Execute Search
     TestApp.Verify Search Results
 
-Can Add Dress To Cart
-    TestApp.Go To Sign In Page
-    TestApp.Valid Sign In
-    Common.Go Home
-    TestApp.View Dress Listing
+User Can Add Dress To Cart
+    TestApp.Move To Dress Listing
     TestApp.Choose Dress
-    TestApp.Add Dress To Cart
+    TestApp.Add Product To Cart
 
 Can Add Blouse To Cart
-    TestApp.View Women Page
+    TestApp.Move To Women Listing
     TestApp.Choose Blouse
-    TestApp.Add Blouse To Cart
+    TestApp.Add Product To Cart
 
 Can Remove Product from Cart
     TestApp.Go To Cart Page

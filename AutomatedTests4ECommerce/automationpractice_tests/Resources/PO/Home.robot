@@ -4,7 +4,7 @@ Library     SeleniumLibrary
 *** Variables ***
 ${URL}                              http://www.automationpractice.pl/index.php
 ${HOMEPAGE_SLIDER}                  //div[@id='homepage-slider']
-${SEARCH_TERM}                      dress
+
 
 *** Keywords ***
 Open Page

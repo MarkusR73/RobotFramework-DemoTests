@@ -7,6 +7,7 @@ ${SUMMARY_TEXT}                     xpath=//h1[@id='cart_title']
 ${DELETE_ICON_DRESS}                xpath=//a[@id='6_40_0_0']/i
 ${DRESS_LOCATOR}                    //tr[@id='product_6_40_0_0']
 ${PRODUCT_COUNT_ELEMENT}            xpath=//span[@id='summary_products_quantity']
+${PRODUCT_COUNT}                    0
 ${EXPECTED_COUNT}                   1 product
 ${TOTAL_PRICE}                      id=total_price
 ${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
@@ -15,12 +16,31 @@ ${CHECKOUT_LINK}                    xpath=//p/a[@title='Proceed to checkout']
 Verify Load
     Wait Until Page Contains Element   ${SUMMARY_TEXT}
 
-Remove Dress
-    Common.Click Or Scroll     ${DELETE_ICON_DRESS}
+Check Product Count
+    ${text} =        Get Text    ${PRODUCT_COUNT_ELEMENT}
+    ${product_count} =    Evaluate    int(re.search(r'\\d+', '''${text}''').group(0))    modules=re
+    Set Global Variable    ${PRODUCT_COUNT}     ${product_count}
 
-Verify Dress Disappearance
-    Wait Until Element Is Not Visible   ${DRESS_LOCATOR}
-    Common.Wait Until Expected Value Is Visible    ${EXPECTED_COUNT}   ${PRODUCT_COUNT_ELEMENT}
+Remove Product
+    [Arguments]     ${delete_icon}  ${locator}
+    Check Product Count
+    Common.Click Or Scroll          ${delete_icon}
+    Verify Product Disappearance    ${locator}
+
+Verify Product Disappearance
+    [Arguments]     ${locator}
+    Wait Until Element Is Not Visible               ${locator}
+    ${expected_count} =             Evaluate        ${PRODUCT_COUNT} - 1
+    Wait Until Expected Product Count Is Visible    ${expected_count}
+
+Wait Until Expected Product Count Is Visible
+    [Arguments]  ${expected_value}
+    FOR  ${index}  IN RANGE  0  10
+        Check Product Count
+        Run Keyword If  ${PRODUCT_COUNT} == ${expected_value}  Exit For Loop
+        Sleep  1s
+    END
+    Should Be Equal As Integers    ${PRODUCT_COUNT}     ${expected_value}      Expected value '${expected_value}' not found for locator.
 
 Price Should Be Visible
     Wait Until Element Is Visible   ${TOTAL_PRICE}

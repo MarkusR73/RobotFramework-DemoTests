@@ -6,7 +6,6 @@ Library     SeleniumLibrary
 *** Variables ***
 ${BROWSER}              firefox
 &{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
-${HOME_ICON}            xpath=//a[@title='Return to Home']
 
 *** Keywords ***
 Begin Web Test
@@ -18,9 +17,6 @@ End Web Test
 
 Begin Test Case
     Home.Open Page
-
-Go Home
-    Click Link    ${HOME_ICON}
 
 Generate User Information
     ${USER_INFORMATION.EMAIL}=      Generate Random Email
@@ -52,16 +48,3 @@ Scroll And Click Element
     END
     # Fail the test if the element was not clicked successfully
     Run Keyword If    not ${is_clickable}    Fail    Unable to click element with locator '${locator}' after scrolling.
-
-Wait Until Expected Value Is Visible
-    [Arguments]  ${expected_value}  ${locator}
-    # Retry up to 10 times with a 1-second interval
-    FOR  ${index}  IN RANGE  0  10
-        # Retrieve the current value from the element
-        ${current_value}=  Get Text   ${locator}
-        # Check if the current value matches the expected value
-        Run Keyword If  '${current_value}' == '${expected_value}'  Exit For Loop
-        Sleep  1s
-    END
-    # Fail the test if the value is not updated
-    Should Be True    '${current_value}' == '${expected_value}'    Expected value '${expected_value}' not found for locator '${locator}'
