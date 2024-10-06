@@ -39,12 +39,10 @@ Sign Out
     SignIn.Verify Page Loaded
 
 Sign In With Valid Credentials
-    Go To Sign In Page
     SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
     MyAccount.Verify Sign In
 
 Sign In With Invalid Credentials
-    Go To Sign In Page
     SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
     SignIn.Verify Error Message
 

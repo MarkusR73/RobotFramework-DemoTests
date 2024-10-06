@@ -19,13 +19,16 @@ New User Should Be Able To Create An Account
     TestApp.Sign Out
 
 User Should Be Able To Sign In With Valid Credentials
+    Go To Sign In Page
     TestApp.Sign In With Valid Credentials
     TestApp.Sign Out
 
 User Shouldn't Be Able To Sign In With Invalid Credentials
+    Go To Sign In Page
     TestApp.Sign In With Invalid Credentials
 
 User Can Search For Products
+    Go To Sign In Page
     TestApp.Sign In With Valid Credentials
     TestApp.Execute Search
     TestApp.Verify Search Results
