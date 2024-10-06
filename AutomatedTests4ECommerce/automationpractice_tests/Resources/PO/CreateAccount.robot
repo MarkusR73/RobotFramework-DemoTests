@@ -17,12 +17,6 @@ ${REGISTER_BUTTON}                  id=submitAccount
 Verify Page Loaded
     Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
 
-Fill User Information
-    Select Gender               ${GENDER_MR_CHECKBOX}
-    Input Name Information      ${USER_INFORMATION.FIRSTNAME}       ${USER_INFORMATION.LASTNAME}
-    Input Password              ${USER_INFORMATION.PASSWORD}
-    Select Date Of Birth        ${USER_INFORMATION.BIRTHDAY}        ${USER_INFORMATION.BIRTH_MONTH}     ${USER_INFORMATION.BIRTH_YEAR}
-
 Select Gender
     [Arguments]     ${locator}
     Click Element   ${locator}

@@ -16,29 +16,37 @@ Resource    Common.robot
 
 *** Keywords ***
 Go To Sign In Page
-    NavBar.Click Bar Element    ${SIGN_IN_LINK}
+    NavBar.Click Bar Element                    ${SIGN_IN_LINK}
     SignIn.Verify Page Loaded
 
-Create New Account
-    SignIn.Begin Account Creation
+Begin Account Creation
+    SignIn.Input Email Address                  ${USER_INFORMATION.EMAIL}
+    SignIn.Click Create Account Button
     CreateAccount.Verify Page Loaded
-    CreateAccount.Fill User Information
+
+Fill In User Information
+    CreateAccount.Select Gender                 ${GENDER_MR_CHECKBOX}
+    CreateAccount.Input Name Information        ${USER_INFORMATION.FIRSTNAME}       ${USER_INFORMATION.LASTNAME}
+    CreateAccount.Input Password                ${USER_INFORMATION.PASSWORD}
+    CreateAccount.Select Date Of Birth          ${USER_INFORMATION.BIRTHDAY}        ${USER_INFORMATION.BIRTH_MONTH}     ${USER_INFORMATION.BIRTH_YEAR}
+
+Submit User Information Form
     CreateAccount.Submit Account Information
     MyAccount.Verify Success Of Account Creation
-
-Valid Sign In
-    Go To Sign In Page
-    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
-    MyAccount.Verify Sign In
-
-Invalid Sign In
-    Go To Sign In Page
-    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
-    SignIn.Verify Error Message
 
 Sign Out
     MyAccount.Sign Out
     SignIn.Verify Page Loaded
+
+Sign In With Valid Credentials
+    Go To Sign In Page
+    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
+    MyAccount.Verify Sign In
+
+Sign In With Invalid Credentials
+    Go To Sign In Page
+    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
+    SignIn.Verify Error Message
 
 Execute Search
     NavBar.Input Search Term      ${SEARCH_TERM}

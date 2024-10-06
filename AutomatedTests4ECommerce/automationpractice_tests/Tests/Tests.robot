@@ -13,19 +13,20 @@ Test Setup          Common.Begin Test Case
 New User Should Be Able To Create An Account
     Common.Generate User Information
     TestApp.Go To Sign In Page
-    TestApp.Create New Account
+    TestApp.Begin Account Creation
+    TestApp.Fill In User Information
+    TestApp.Submit User Information Form
     TestApp.Sign Out
 
-Valid User Can Sign In
-    TestApp.Valid Sign In
+User Should Be Able To Sign In With Valid Credentials
+    TestApp.Sign In With Valid Credentials
     TestApp.Sign Out
 
-Can't Sign In With Wrong Password
-    TestApp.Go To Sign In Page
-    TestApp.Invalid Sign In
+User Shouldn't Be Able To Sign In With Invalid Credentials
+    TestApp.Sign In With Invalid Credentials
 
 User Can Search For Products
-    TestApp.Valid Sign In
+    TestApp.Sign In With Valid Credentials
     TestApp.Execute Search
     TestApp.Verify Search Results
 
