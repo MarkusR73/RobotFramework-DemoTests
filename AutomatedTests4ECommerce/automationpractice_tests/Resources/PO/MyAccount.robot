@@ -8,7 +8,7 @@ ${MY_ACCOUNT_HEADER}                    xpath=//h1[text()='My account']
 
 
 *** Keywords ***
-Verify Success Of Account Creation
+Success Message Should Be Visible
     Wait Until Page Contains Element    ${ACCOUNT_CREATION_SUCCESS_MESSAGE}
 
 Verify Sign In

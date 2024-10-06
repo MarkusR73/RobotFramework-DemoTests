@@ -20,19 +20,20 @@ Go To Sign In Page
     SignIn.Verify Page Loaded
 
 Begin Account Creation
-    SignIn.Input Email Address                  ${USER_INFORMATION.EMAIL}
-    SignIn.Click Create Account Button
+    SignIn.Fill Create An Account "Email address" Filed    ${USER_INFORMATION.EMAIL}
+    SignIn.Click "Create an account" Button
     CreateAccount.Verify Page Loaded
 
 Fill In User Information
-    CreateAccount.Select Gender                 ${GENDER_MR_CHECKBOX}
-    CreateAccount.Input Name Information        ${USER_INFORMATION.FIRSTNAME}       ${USER_INFORMATION.LASTNAME}
-    CreateAccount.Input Password                ${USER_INFORMATION.PASSWORD}
-    CreateAccount.Select Date Of Birth          ${USER_INFORMATION.BIRTHDAY}        ${USER_INFORMATION.BIRTH_MONTH}     ${USER_INFORMATION.BIRTH_YEAR}
+    CreateAccount.Select "Title"                ${Title_MR}
+    CreateAccount.Fill "First name" Field       ${USER_INFORMATION.FIRSTNAME}
+    CreateAccount.Fill "Last name" Field        ${USER_INFORMATION.LASTNAME}
+    CreateAccount.Fill "Password" Field         ${USER_INFORMATION.PASSWORD}
+    CreateAccount.Select "Date Of Birth"        ${USER_INFORMATION.BIRTHDAY}        ${USER_INFORMATION.BIRTH_MONTH}     ${USER_INFORMATION.BIRTH_YEAR}
 
 Submit User Information Form
-    CreateAccount.Submit Account Information
-    MyAccount.Verify Success Of Account Creation
+    CreateAccount.Click "Register" Button
+    MyAccount.Success Message Should Be Visible
 
 Sign Out
     MyAccount.Sign Out

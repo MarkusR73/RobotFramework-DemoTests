@@ -4,7 +4,7 @@ Library     SeleniumLibrary
 
 *** Variables ***
 ${REGISTRATION_FORM_HEADER}         xpath=//h3[contains(text(),'Your personal information')]
-${GENDER_MR_CHECKBOX}               id=id_gender1
+${Title_MR}                         id=id_gender1
 ${FIRSTNAME_FIELD}                  id=customer_firstname
 ${LASTNAME_FIELD}                   id=customer_lastname
 ${PASSWORD_FIELD}                   id=passwd
@@ -17,24 +17,27 @@ ${REGISTER_BUTTON}                  id=submitAccount
 Verify Page Loaded
     Wait Until Page Contains Element   ${REGISTRATION_FORM_HEADER}
 
-Select Gender
+Select "Title"
     [Arguments]     ${locator}
     Click Element   ${locator}
 
-Input Name Information
-    [Arguments]     ${first_name}   ${last_name}
+Fill "First name" Field
+    [Arguments]     ${first_name}
     Input Text  ${FIRSTNAME_FIELD}      ${first_name}
+
+Fill "Last name" Field
+    [Arguments]     ${last_name}
     Input Text  ${LASTNAME_FIELD}       ${last_name}
 
-Input Password
+Fill "Password" Field
     [Arguments]     ${password}
      Input Text  ${PASSWORD_FIELD}       ${password}
 
-Select Date Of Birth
+Select "Date Of Birth"
     [Arguments]     ${day}   ${month}   ${year}
     Select From List By Value    ${BIRTHDAY_SELECTOR}       ${day}
     Select From List By Value    ${BIRTH_MONTH_SELECTOR}    ${month}
     Select From List By Value    ${BIRTH_YEAR_SELECTOR}     ${year}
 
-Submit Account Information
+Click "Register" Button
     Click Button   ${REGISTER_BUTTON}
