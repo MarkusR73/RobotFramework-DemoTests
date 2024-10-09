@@ -19,40 +19,50 @@ New User Should Be Able To Create An Account
     TestApp.Sign Out
 
 User Should Be Able To Sign In With Valid Credentials
-    Go To Sign In Page
+    TestApp.Go To Sign In Page
     TestApp.Sign In With Valid Credentials
     TestApp.Sign Out
 
 User Shouldn't Be Able To Sign In With Invalid Credentials
-    Go To Sign In Page
+    TestApp.Go To Sign In Page
     TestApp.Sign In With Invalid Credentials
 
-User Can Search For Products
-    Go To Sign In Page
-    TestApp.Sign In With Valid Credentials
-    TestApp.Execute Search
+User Should Be Able To Search For Products
+    TestApp.Search For Product              ${SEARCH_TERM}
     TestApp.Verify Search Results
 
-User Can Add Dress To Cart
-    TestApp.Move To Dress Listing
-    TestApp.Choose Dress
+Signed In User Should Be Able To Search For Products
+    TestApp.Go To Sign In Page
+    TestApp.Sign In With Valid Credentials
+    TestApp.Search For Product              ${SEARCH_TERM}
+    TestApp.Verify Search Results
+
+User Should Be Able To Add Product To Cart
+    TestApp.Move To Product Listing         ${DRESSES_LINK}     ${DRESSES_HEADER}
+    TestApp.Choose Product From Listing     ${SUMMER_DRESS}     ${REFERENCE_SUMMER_DRESS}
     TestApp.Add Product To Cart
 
-Can Add Blouse To Cart
-    TestApp.Move To Women Listing
-    TestApp.Choose Blouse
+User Should Be Able To Remove Product From Cart
+    TestApp.View My Shopping Cart
+    TestApp.Remove Product From Cart        ${DELETE_ICON_DRESS}
+
+User Should Be Able To Add Another Product To Cart
+    TestApp.Move To Product Listing         ${WOMEN_LINK}       ${WOMEN_HEADER}
+    TestApp.Choose Product From Listing     ${BLOUSE}           ${REFERENCE_BLOUSE}
     TestApp.Add Product To Cart
 
-Can Remove Product from Cart
-    TestApp.Go To Cart Page
-    TestApp.Remove Dress From Cart
+#User Should Be Able To Remove Prloduct From Cart
+    #TestApp.View My Shopping Cart
+    #TestApp.Remove Product From Cart        ${DELETE_ICON_DRESS}
 
-Can Proceed To Checkout
-    TestApp.Go To Cart Page
-    TestApp.Move To Address Step
-    TestApp.Fill And Save Address Information
-    TestApp.Verify Billing Address And Move To Shipping
-    TestApp.Check Terms Of Service And Move to Payment
+User Should Be Able To Proceed To Checkout
+    TestApp.View My Shopping Cart
+    TestApp.Begin Checkout Process
+    TestApp.Fill Address Information
+    TestApp.Verify Billing Address
+    TestApp.Move To Shipping Step
+    TestApp.Check Terms Of Service
+    TestApp.Move To Payment Step
     TestApp.Verify Total Price
-    TestApp.Choose Payment Method And Move To Confirmation
+    TestApp.Choose Payment Method
     TestApp.Confirm Order

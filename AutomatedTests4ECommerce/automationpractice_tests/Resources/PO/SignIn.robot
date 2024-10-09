@@ -10,6 +10,7 @@ ${SIGN_IN_EMAIL_FIELD}              id=email
 ${LOGIN_PASSWORD_FIELD}             id=passwd
 ${LOCK_ICON}                        id=SubmitLogin
 ${WRONG_PASSWORD}                   wrong
+${ERROR_MESSAGE}                    Authentication failed.
 ${INVALID_PASSWORD_ERROR}           xpath=//p[text()='There is 1 error']
 
 *** Keywords ***

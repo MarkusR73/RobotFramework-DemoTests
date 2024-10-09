@@ -4,18 +4,19 @@ Resource    ../Common.robot
 Library    SeleniumLibrary
 
 *** Variables ***
-${PAY_BY_CHECK_ELEMENT}             xpath=//p/a[@title='Pay by check.']
+${PAY_BY_CHECK_LINK}                xpath=//p/a[@title='Pay by check.']
+${EXPECTED_TOTAL_PRICE}             $34
+${TOTAL_PRICE_LOCATOR}              id=total_price
 
 *** Keywords ***
-Verify Load
-    Element Should Be Visible       ${PAY_BY_CHECK_ELEMENT}
+Verify Page Loaded
+    Element Should Be Visible       ${PAY_BY_CHECK_LINK}
 
-Validate Total Price
-    ${total_price}=                         Get Text            ${TOTAL_PRICE}
-    Run Keyword And Continue On Failure     Should Be Equal     ${total_price}    $34
-
-Log The Result
-    Log    Total price is: ${total_price}
+Compare Locator Value To Expected Value
+    [Arguments]     ${locator}      ${expected_value}
+    ${total_price}=     Get Text            ${TOTAL_PRICE_LOCATOR}
+    Run Keyword And Continue On Failure     Should Be Equal    ${total_price}    ${EXPECTED_TOTAL_PRICE}
 
 Choose Payment Method
-    Click Element    ${PAY_BY_CHECK_ELEMENT}
+    [Arguments]     ${payment_method}
+    Click Element    ${PAY_BY_CHECK_LINK}

@@ -7,7 +7,7 @@ ${CONFIRM_MY_ORDER_BUTTON}          xpath=//p/button[@type='submit']
 ${ORDER_COMPLETE_MESSAGE}           xpath=//p[@class='alert alert-success']
 
 *** Keywords ***
-Verify Load
+Verify Page Loaded
     Wait Until Page Contains Element    ${CONFIRM_MY_ORDER_BUTTON}
 
 Confirm Order

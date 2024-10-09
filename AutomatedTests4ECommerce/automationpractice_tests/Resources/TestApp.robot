@@ -36,7 +36,7 @@ Submit User Information Form
     MyAccount.Success Message Should Be Visible
 
 Sign Out
-    MyAccount.Sign Out
+    NavBar.Click Bar Element    ${SIGN_OUT_LINK}
     SignIn.Verify Page Loaded
 
 Sign In With Valid Credentials
@@ -47,77 +47,70 @@ Sign In With Invalid Credentials
     SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
     SignIn.Verify Error Message
 
-Execute Search
-    NavBar.Input Search Term      ${SEARCH_TERM}
-    NavBar.Execute Search
+Search For Product
+    [Arguments]                     ${search_term}
+    NavBar.Input Search Term        ${SEARCH_TERM}
+    NavBar.Click Bar Element        ${SEARCH_BUTTON}
 
 Verify Search Results
-    ProductListing.Verify Search Listing Load
-    ProductListing.Verify Result Count
-
-Move To Dress Listing
-    Move To Product Listing     ${DRESSES_LINK}     ${DRESSES_HEADER}
-
-Choose Dress
-    Move To Product Page        ${CHOSEN_DRESS}     ${PRODUCT_REFERENCE_DRESS}
-
-Move To Women Listing
-    Move To Product Listing     ${WOMEN_LINK}     ${WOMEN_HEADER}
-
-Choose Blouse
-    Move To Product Page        ${CHOSEN_BLOUSE}    ${PRODUCT_REFERENCE_BLOUSE}
+    ProductListing.Verify Page Loaded   ${RESULT_COUNT_ELEMENT}
+    ProductListing.Verify Result Count  ${EXPECTED_RESULT_COUNT}
 
 Move To Product Listing
     [Arguments]     ${bar_element}  ${landing_page_element}
-    NavBar.Click Bar Element        ${bar_element}
-    ProductListing.Verify Load      ${landing_page_element}
+    NavBar.Click Bar Element            ${bar_element}
+    ProductListing.Verify Page Loaded   ${landing_page_element}
 
-Move To Product Page
+Choose Product From Listing
     [Arguments]     ${product}  ${landing_page_element}
     ProductListing.Choose Product   ${product}
-    Product.Verify Load             ${landing_page_element}
+    Product.Verify Page Loaded      ${landing_page_element}
 
 Add Product To Cart
-    Product.Choose Color
+    Product.Choose Color            ${COLOR_BOX_WHITE}
     Product.Verify Availability
-    Product.Add To Cart
-    Product.Verify Successful Addition
-    Product.Continue Shopping
+    Product.Click "Add to cart" Button
+    Product.Window With Success Message should Appear
+    Product.Click "Continue Shopping" Element
 
-Go To Cart Page
-    NavBar.Click Cart Link
-    CartSummary.Verify Load
+View My Shopping Cart
+    NavBar.Click Bar Element    ${CART_LINK}
+    CartSummary.Verify Page Loaded
 
-Remove Dress From Cart
-    CartSummary.Remove Product        ${DELETE_ICON_DRESS}     ${DRESS_LOCATOR}
+Remove Product From Cart
+    [Arguments]     ${delete_icon}
+    CartSummary.Remove Product      ${delete_icon}
 
-Move To Address Step
-    CartSummary.Proceed Link Should Be Visible
-    CartSummary.Click Proceed Link
-    YourAddresses.Verify Load
+#Fix all below as shown above
+Begin Checkout Process
+    CartSummary.Click "Proceed to checkout" Link
+    YourAddresses.Verify Page Loaded
 
-Fill And Save Address Information
+Fill Address Information
     YourAddresses.Fill Address Info
     YourAddresses.Save Address Info
 
-Verify Billing Address And Move To Shipping
-    CartAddress.Verify Load
+Verify Billing Address
+    CartAddress.Verify Page Loaded
     CartAddress.Verify Billing Address
-    CartAddress.Move To Shipping
 
-Check Terms Of Service And Move to Payment
-    CartShipping.Verify Load
+Move To Shipping Step
+    CartAddress.Move To Shipping
+    CartShipping.Verify Page Loaded
+
+Check Terms Of Service
     CartShipping.Check Terms Box
+
+Move To Payment Step
     CartShipping.Move To Payment
-    CartPayment.Verify Load
+    CartPayment.Verify Page Loaded
 
 Verify Total Price
-    CartPayment.Validate Total Price
-    CartPayment.Log The Result
+    CartPayment.Compare Locator Value To Expected Value    ${TOTAL_PRICE_LOCATOR}      ${EXPECTED_TOTAL_PRICE}
 
-Choose Payment Method And Move To Confirmation
-    CartPayment.Choose Payment Method
-    CartConfirmation.Verify Load
+Choose Payment Method
+    CartPayment.Choose Payment Method               ${PAY_BY_CHECK_LINK}
+    CartConfirmation.Verify Page Loaded
 
 Confirm Order
     CartConfirmation.Confirm Order

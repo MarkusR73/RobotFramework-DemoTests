@@ -7,7 +7,7 @@ ${CHECKBOX_DELIVERY_ADDRESS}        xpath=//div[@class='checker']/span
 ${PROCEED_TO_CHECKOUT_BUTTON}       xpath=//p/button[@type='submit']
 
 *** Keywords ***
-Verify Load
+Verify Page Loaded
     Wait Until Page Contains Element    ${CHECKBOX_DELIVERY_ADDRESS}
 
 Verify Billing Address
@@ -15,4 +15,4 @@ Verify Billing Address
     Should Be Equal As Strings      ${Checkbox1_value}          checked
 
 Move To Shipping
-    Common.Click Or Scroll                 ${PROCEED_TO_CHECKOUT_BUTTON}
+    Click Element                 ${PROCEED_TO_CHECKOUT_BUTTON}

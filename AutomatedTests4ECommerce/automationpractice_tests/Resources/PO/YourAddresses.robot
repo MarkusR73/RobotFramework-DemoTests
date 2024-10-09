@@ -13,9 +13,10 @@ ${HOME_PHONE_FIELD}                 id=phone
 ${SAVE_BUTTON}                      id=submitAddress
 
 *** Keywords ***
-Verify Load
+Verify Page Loaded
     Wait Until Page Contains Element   ${YOUR_ADDRESSES_HEADER}
 
+#Fix
 Fill Address Info
     Input Text                          ${ADDRESS_FIELD}            ${USER_INFORMATION.ADDRESS}
     Input Text                          ${CITY_FIELD}               ${USER_INFORMATION.CITY}
