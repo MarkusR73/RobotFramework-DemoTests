@@ -2,8 +2,10 @@
 Resource            ../Resources/Common.robot
 Resource            ../Resources/TestApp.robot
 
-Test Setup         Common.Begin Test Case
-Test Teardown      Common.End Test Case
+Suite Setup         Common.Begin Web Test
+Test Setup          Common.Begin Test Case
+Test Teardown       Common.End Test Case
+Suite Teardown      Common.End Web Test
 
 # Run the script:
 # robot -d Results Tests/Tests.robot
@@ -11,7 +13,7 @@ Test Teardown      Common.End Test Case
 *** Test Cases ***
 New User Should Be Able To Create An Account
     # robot -d Results -i 0001 Tests/Tests.robot
-    [Tags]  0001    Login   Search  Add/Remove  Checkout
+    [Tags]  0001    Login   Search  Add    Remove  Checkout
     Common.Generate User Information
     TestApp.Begin Account Creation
     TestApp.Fill In User Information

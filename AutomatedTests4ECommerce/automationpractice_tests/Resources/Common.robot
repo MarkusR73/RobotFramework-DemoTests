@@ -2,19 +2,31 @@
 Resource    PO/Home.robot
 Library     ../Libraries/RandomRegistration.py
 Library     SeleniumLibrary
+Library     Dialogs
 
 *** Variables ***
-${BROWSER}              firefox
 &{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
 
 *** Keywords ***
+Begin Web Test
+    Select Browser
+
 Begin Test Case
-    Open Browser    about:blank    ${BROWSER}
     Home.Open Page
+    Home.Verify Load
     Maximize Browser Window
 
 End Test Case
+    Close Browser
+
+End Web Test
     Close All Browsers
+
+Select Browser
+    # Present a dropdown for browser selection
+    ${BROWSER} =  Get Selection From User  Select a browser  firefox  edge  chrome
+    # Makes ${BROWSER} available globally
+    Set Global Variable  ${BROWSER}
 
 Generate User Information
     ${USER_INFORMATION.EMAIL}=      Generate Random Email
