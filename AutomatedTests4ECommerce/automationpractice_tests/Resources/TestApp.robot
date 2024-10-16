@@ -15,12 +15,10 @@ Resource    PO/SignIn.robot
 Resource    Common.robot
 
 *** Keywords ***
-Go To Sign In Page
-    NavBar.Click Bar Element                    ${SIGN_IN_LINK}
-    SignIn.Verify Page Loaded
-
 Begin Account Creation
-    SignIn.Fill Create An Account "Email address" Filed    ${USER_INFORMATION.EMAIL}
+    NavBar.Navigate To                                      ${SIGN_IN_LINK}
+    SignIn.Verify Page Loaded
+    SignIn.Fill Create An Account "Email address" Filed     ${USER_INFORMATION.EMAIL}
     SignIn.Click "Create an account" Button
     CreateAccount.Verify Page Loaded
 
@@ -36,21 +34,25 @@ Submit User Information Form
     MyAccount.Success Message Should Be Visible
 
 Sign Out
-    NavBar.Click Bar Element    ${SIGN_OUT_LINK}
+    NavBar.Navigate To   ${SIGN_OUT_LINK}
     SignIn.Verify Page Loaded
 
 Sign In With Valid Credentials
-    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
+    NavBar.Navigate To              ${SIGN_IN_LINK}
+    SignIn.Verify Page Loaded
+    SignIn.Try To Sign In           ${USER_INFORMATION.EMAIL}   ${USER_INFORMATION.PASSWORD}
     MyAccount.Verify Sign In
 
 Sign In With Invalid Credentials
-    SignIn.Try To Sign In   ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
+    NavBar.Navigate To              ${SIGN_IN_LINK}
+    SignIn.Verify Page Loaded
+    SignIn.Try To Sign In           ${USER_INFORMATION.EMAIL}   ${WRONG_PASSWORD}
     SignIn.Verify Error Message
 
 Search For Product
     [Arguments]                     ${search_term}
     NavBar.Input Search Term        ${SEARCH_TERM}
-    NavBar.Click Bar Element        ${SEARCH_BUTTON}
+    NavBar.Navigate To       ${SEARCH_BUTTON}
 
 Verify Search Results
     ProductListing.Verify Page Loaded   ${RESULT_COUNT_ELEMENT}
@@ -58,7 +60,7 @@ Verify Search Results
 
 Move To Product Listing
     [Arguments]     ${bar_element}  ${landing_page_element}
-    NavBar.Click Bar Element            ${bar_element}
+    NavBar.Navigate To           ${bar_element}
     ProductListing.Verify Page Loaded   ${landing_page_element}
 
 Choose Product From Listing
@@ -74,14 +76,13 @@ Add Product To Cart
     Product.Click "Continue Shopping" Element
 
 View My Shopping Cart
-    NavBar.Click Bar Element    ${CART_LINK}
+    NavBar.Navigate To   ${CART_LINK}
     CartSummary.Verify Page Loaded
 
 Remove Product From Cart
     [Arguments]     ${delete_icon}
     CartSummary.Remove Product      ${delete_icon}
 
-#Fix all below as shown above
 Begin Checkout Process
     CartSummary.Click "Proceed to checkout" Link
     YourAddresses.Verify Page Loaded

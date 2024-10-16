@@ -14,9 +14,9 @@ ${HOME_ICON}                        xpath=//a[@title='Return to Home']
 ${SEARCH_TERM}                      dress
 
 *** Keywords ***
-Click Bar Element
+Navigate To
     [Arguments]     ${bar_element}
-    Wait Until Element Is Visible   ${bar_element}
+    Wait Until Element Is Enabled   ${bar_element}
     Click Element                   ${bar_element}
 
 Input Search Term

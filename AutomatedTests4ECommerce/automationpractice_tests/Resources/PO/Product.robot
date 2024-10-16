@@ -31,4 +31,5 @@ Window With Success Message should Appear
     Wait Until Element Is Visible   ${PRODUCT_SUCCERSFULLY ADDED}
 
 Click "Continue Shopping" Element
-    Click Element   ${CONTINUE_SHOPPING_LINK}
+    Click Element                       ${CONTINUE_SHOPPING_LINK}
+    Wait Until Element Is Not Visible   ${CONTINUE_SHOPPING_LINK}

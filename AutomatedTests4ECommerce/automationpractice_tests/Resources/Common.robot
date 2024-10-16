@@ -8,15 +8,13 @@ ${BROWSER}              firefox
 &{USER_INFORMATION}     FIRSTNAME=None  LASTNAME=None   EMAIL=None     PASSWORD=None    BIRTHDAY=1  BIRTH_MONTH=1   BIRTH_YEAR=2000     ADDRESS=None    CITY=None   STATE=1  POSTCODE=90500  COUNTRY=21  PHONE_NUM=+358 666 5555
 
 *** Keywords ***
-Begin Web Test
+Begin Test Case
     Open Browser    about:blank    ${BROWSER}
+    Home.Open Page
     Maximize Browser Window
 
-End Web Test
-    Close Browser
-
-Begin Test Case
-    Home.Open Page
+End Test Case
+    Close All Browsers
 
 Generate User Information
     ${USER_INFORMATION.EMAIL}=      Generate Random Email
