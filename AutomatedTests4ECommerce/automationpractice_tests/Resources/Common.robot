@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    PO/Home.robot
-Library     RandomRegistration.py
+Library     ../Libraries/RandomRegistration.py
 Library     SeleniumLibrary
 
 *** Variables ***
