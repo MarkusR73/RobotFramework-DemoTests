@@ -24,9 +24,9 @@ End Web Test
 
 Select Browser
     # Present a dropdown for browser selection
-    ${BROWSER} =  Get Selection From User  Select a browser  firefox  edge  chrome
-    # Makes ${BROWSER} available globally
-    Set Global Variable  ${BROWSER}
+    ${browser} =  Get Selection From User  Select a browser  firefox  edge  chrome
+    # Makes browser available globally
+    Set Global Variable  ${BROWSER}   ${browser}
 
 Generate User Information
     ${USER_INFORMATION.EMAIL}=      Generate Random Email
