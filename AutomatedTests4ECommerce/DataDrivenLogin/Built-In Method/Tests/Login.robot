@@ -19,6 +19,6 @@ Invalid login scenarios should display correct error messages
     ${INVALID_PASSWORD}
     ${BLANK_CREDENTIALS}
 
-Valid user shuold be able to login
+Valid user should be able to login
     [Template]      LoginApp.Test multiple login scenarios
     ${VALID_CREDENTIALS}
