@@ -1,6 +1,5 @@
 *** Settings ***
 Library     SeleniumLibrary
-Resource    Dashboard.robot
 Resource    ../Common.robot
 
 *** Variables ***
@@ -9,7 +8,6 @@ ${LOGIN_URL}                        https://opensource-demo.orangehrmlive.com/we
 ${LOGIN_PAGE_HEADER}                xpath=//h5[text()='Login']
 
 ${LOGIN_USERNAME_FIELD}             xpath=//input[@name="username"]
-#${LOGIN_USERNAME_FIELD}             xpath=//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input
 ${LOGIN_PASSWORD_FIELD}             xpath=//input[@name="password"]
 ${LOGIN_BUTTON}                     xpath=//button[@type='submit']
 
@@ -17,6 +15,7 @@ ${DASHBOARD_TEXT_LOCATOR}           xpath=//h6[text()='Dashboard']
 
 ${ERROR_MESSAGE_LOCATOR}            xpath=//div[1]/p[text()='Invalid credentials']
 ${EMAIL_REQUIRED_ALERT_LOCATOR}     xpath=//div[1]/div/span[text()='Required']
+${DASHBOARD_TEXT_LOCATOR}           xpath=//h6[text()='Dashboard']
 
 *** Keywords ***
 Navigate to

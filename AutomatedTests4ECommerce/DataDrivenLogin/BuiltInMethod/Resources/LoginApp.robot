@@ -1,8 +1,6 @@
 *** Settings ***
 Resource    PO/LoginPage.robot
 
-*** Variables ***
-
 *** Keywords ***
 Test multiple login scenarios
     [Arguments]     ${credentials}
