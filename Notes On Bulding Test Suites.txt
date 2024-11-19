@@ -1,0 +1,245 @@
+Organizing Your Project Files
+
+/ProjectBase
+	/Tests
+		Product.robot		<- 	test script (entire app)	[This could be splitted into "Product_Home.robot" & "Product_Login.robot"]
+	/Resources
+		ProductApp.robot 	<- 	app keyword file (app capabilities)
+		/PO
+				Home.robot 	<- 	home page-specific locators & keywords
+				Login.robot 	<- 	login page-specific locators & keywords
+				TopNav.robot 	<- 	top nav-specific locators & keywords
+	/Results
+-------------------------------------------------------------------------------------------------------------------------
+
+Exploring libraries and handy keywords
+
+- Built In
+	- Log/Comment
+	- Conversions
+	- Run Keyword(s) Options
+	- Repeat Keyword
+	- Set Variable (test, suite, global)
+	- Should/Should not (contain | be equal)
+	- Sleep
+ 	- Wait until keyword succeeds
+ 
+- Dialogs
+	- Execute manual step (presents dialog with P/F buttons and waits)
+	- Get selection from user (presents a dialog containing a dropdown list)
+	- Get value from user (presents a dialog with text entry box)
+	- Pause execution (presents a dialog with OK button. Click to resume.)
+
+- Operating System
+	- Files
+		- Create, cope, move, delete, read, write, append
+		- List files
+		- Get/set modified time (variable datetime formatting)
+		- Split extension
+
+	- Directories
+		- Create, copy, move, delete
+		- Count files, should be empty
+		- List directories
+		- Split path
+	
+	- Environment Variables (get/set)
+
+	- Synchronization
+		- Wait until created/removed
+		- Should/Should not exist
+
+- Database
+	- Install version 0.7 (https://github.com/franz-see/Robotframework-Database-Library; https://github.com/MarketSquare/Robotframework-Database-Library)
+
+	- Depends on a "DB API" Library
+		- SQL Serve = pip install pymssql
+		- MySQL = pip install pymysql
+	
+	- Keyword Documentation (http://franz-see.guthub.io/Robotframework-Database-Library/api/0.6/DatabaseLibrary.html)	
+
+- API
+	- pip install request
+	- pip install robotframawork-request
+	- Examine the keyword docs
+	- 3 steps
+		1) Create session
+		2) Make the call (Get, Put, Post, or Delete)
+		3) Check the response
+
+	- More advanced testing
+		- Authentication
+		- See level 2 course
+
+- XML
+
+- Selenium
+	- pip install robotframawork-seleniumlibrary
+	- Add/Delete cookie
+	- Alert should be present
+	- Choose file
+	- Click
+	- Input text
+	- Page should contain
+	- Select
+	- Switch browser
+	- Submit form
+	- Wait until page contains
+
+- String
+	- Generate random string
+	- Convert to (upper/lower)
+	- Fetch from (left/right)
+	- Get substring
+	- Split
+	- Should be (title case, upper/lower, unicode)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Return values from keywords
+
+- Pass information from an executing keyword back to the keyword that called it
+- Execute as
+	- ${Save_Return_value} = 	Call keyword that returns value
+	- [Return]			something that you want to return
+
+------------------------------------------------------------------------------------------------------------------------
+
+Variables
+
+Global -> ${UPPER_CASE}
+Local  -> ${lower_case}
+
+Commandline variable manipulation -> robot -d results -v BROWSER:ie TestToRun.robot
+
+-------------------------------------------------------------------------------------------------------------------------
+
+CREATING LOCATORS:
+
+Simple paths (Not always unique!!)
+CSS -> css=tag[attribute='some value']
+XPATH -> xpath=//tag[@attribute='some value']
+
+Absolute paths
+CSS -> css=parent_tag[attribute='some value']>anchor
+XPATH -> xpath=//parent_tag[@attribute='some value']/anchor
+
+Relative paths
+CSS -> css=parent_tag[attribute='some value']>first_child>second_child>...>anchor
+CSS -> css=parent_tag[attribute='some value'] anchor (Does not care about the childs between parent and anchor tag)
+XPATH -> xpath=//parent_tag[@attribute='some value']/first_child/second_child/.../anchor
+XPATH -> xpath=//parent_tag[@attribute='some value']//anchor (Does not care about the childs between parent and anchor tag)
+
+Partial Locators
+
+Starts-wiht
+CSS -> css=tag[attribute^='some partial value']
+XPATH -> xpath=//tag[starts-with(@attribute,'some partial value')]
+
+Ends-wiht
+CSS -> css=tag[attribute$='some partial value']
+XPATH -> xpath=//tag[ends-with(@attribute,'some partial value')]
+
+Contains
+CSS -> css=tag[attribute*='some partial value']
+XPATH -> xpath=//tag[contains(@attribute,'some partial value')]
+XPATH -> xpath=//tag[contains(text(),'some full or partial link text')]
+XPATH -> xpath=//tag[contains(.,'some full or partial link text')]
+
+-----------------------------------------------------------------------------------------------------------------------
+
+IF ELSE - Making Decisions
+
+- Test a condition, and take the correct action
+- Execute as:
+		Run Keyword if		${MyValue} == 'Some data'	Keyword
+		Run Keyword if		${MyValue} == 'Some data'	Keyword1	Else	Keyword2
+
+		Run Keyword if		${MyValue} == 'Some data 1'	Keyword1	
+		...	Else if		${MyValue} == 'Some data 2'	keyword2
+		...	Else		Keyword3
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Loops
+
+- Uses
+	- "Stress test" an application
+	- Walk through lists and perform actions with each item
+	- Repeat actions with different values
+	- Perform mathematically sequenced algorithms
+
+- Always begin with "FOR" and closes with "END":
+
+	For	${animal}	IN	cat	dog	cow
+		Keyword		${animal}
+		Another keyword
+	END
+
+- Loop through a range of numbers (1-10)
+	- a step value can be included:
+
+	FOR	${index}	In Range	1	10	!2!
+		Do Something
+	END
+
+- Loop over a list of items
+
+	For	${animal}	IN	@{ANIMALS}
+		Keyword		${animal}
+		Another keyword
+	END
+
+- Exit for loop prematurely:
+
+	For	${animal}	IN	@{ANIMALS}
+		Keyword		${animal}
+		Run Keyword If	"${animal}" == "cow"	Exit For Loop
+	END
+
+
+
+- Optionally, can "Repeat Keyword	5 times 	a keyword" or "Repeat Keyword	5s	a keyword"
+	-"times" -text is optional
+
+------------------------------------------------------------------------------------------------------------------------
+
+Dictionaries
+
+Referred to in Collections library and BuiltIn library
+
+&{USER_INFORMATION}	FirstName=Pentti	LastName=Hilkuri	Email=X		Password=Y
+
+Usage: ${USER_INFROMATION.FirtsName} will put "Pentti" on that spot (etc.)
+
+------------------------------------------------------------------------------------------------------------------------
+
+Data-Driven Testing
+
+- Examine how different "classes" of data will perform in the same test procedure
+
+------------------------------------------------------------------------------------------------------------------------
+
+Jenkins & Continuous Testing
+
+- Why Continuous Integration/Deployment
+
+	- Save time & money
+	- Increase consistency
+	- Increase speed to market
+	- Automate some or all steps of building, deploying, and testing software
+		
+		- Unit testing
+		- Functional testing
+		- Acceptance testing
+		- Load testing
+
+- what is Jenkins?
+
+	- Web application (Java)
+	- Can run on a local desktop or a server	
+	- Create & configure jobs which perform build & deployment automation
+		
+		1) Setup (get the code from Git)
+		2) Multiple "build steps" (build, deploy, test)
+		3) Post-build steps (collect results, notify)
