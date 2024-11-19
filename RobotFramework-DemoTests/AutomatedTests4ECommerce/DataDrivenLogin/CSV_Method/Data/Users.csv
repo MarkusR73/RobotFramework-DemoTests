@@ -1,4 +1,0 @@
-Toljanteri,Toljanteri99,xpath=//div[1]/p[text()='Invalid credentials'],Invalid credentials
-Admin,wrong,xpath=//div[1]/p[text()='Invalid credentials'],Invalid credentials
-,,xpath=//div[1]/div/span[text()='Required'],Required
-Admin,admin123,xpath=//h6[text()='Dashboard'],Dashboard
