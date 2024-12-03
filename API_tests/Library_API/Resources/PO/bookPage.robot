@@ -21,6 +21,7 @@ Verify load
 
 Parse book title from url
     ${url}=                 get location
+    close browser
     ${title}=               common.Extract text from url        ${url}          ${SPLITTER}             ${TITLE_INDEX}
     ${parsed_title}=        common.Replace string separator     ${title}        ${BROWSER_SEPARATER}    ${API_SEPARATOR}
     set global variable     ${SEARCH_TITLE}                     ${parsed_title}
