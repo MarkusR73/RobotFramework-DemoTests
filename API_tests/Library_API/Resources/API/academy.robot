@@ -10,6 +10,7 @@ Resource        ../testApp.robot
 *** Variables ***
 ${LIBRARY_POST_URL}                 https://rahulshettyacademy.com/Library/Addbook.php
 ${LIBRARY_GET_URL}                  https://rahulshettyacademy.com/Library/GetBook.php
+${LIBRARY_DELETE_URL}               https://rahulshettyacademy.com/Library/DeleteBook.php
 &{POSTED_BOOK_INFO}
 ${BOOK_ID}                          None
 &{EXPECTED_POST_RESPONSE_DATA}      Msg=successfully added      ID=None
@@ -62,5 +63,8 @@ Parse book id from response data
 Get book by id
     ${params}=              Create Dictionary       ID=${BOOK_ID}
     ${response}=    GET     ${LIBRARY_GET_URL}      params=${params}
-    Log     ${response.json()}
     set global variable     ${API_RESPONSE}         ${response}
+
+Delete request by id
+    ${response}=     POST       ${LIBRARY_DELETE_URL}   json{${BOOK_ID}}
+    set global variable         ${API_RESPONSE}         ${response}

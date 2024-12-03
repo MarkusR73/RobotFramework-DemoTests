@@ -22,8 +22,6 @@ Build url
 
 Validate response status
     [Arguments]    ${response}      ${expected_status_code}
-    log    ${response}
-    log    ${expected_status_code}
     should be equal as integers    ${response.status_code}      ${expected_status_code}
 
 Validate response data
@@ -47,8 +45,6 @@ Replace string separator
 
 Parse data by keys
     [Arguments]     ${keys}     ${json_data}
-    log    ${keys}
-    log    ${json_data}
     ${len}=         get length          ${keys}
     @{values}=      create list
     FOR    ${i}     IN RANGE    ${len}

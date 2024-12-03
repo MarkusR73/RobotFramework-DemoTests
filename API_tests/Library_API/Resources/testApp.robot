@@ -33,3 +33,9 @@ Validate response
 Fetch book info by id
     academy.Parse book id from response data
     academy.Get book by id
+
+Delete book info by id
+    academy.Delete request by id
+
+Validate delete response
+    common.Validate response status     ${API_RESPONSE}     ${EXPECTED_STATUS_CODE}

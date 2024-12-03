@@ -20,3 +20,7 @@ Should be able to post retrieved book information to another API
 Should be able to retrieve posted book information
     testApp.Fetch book info by id
     testApp.Validate response
+
+Should be able to delete posted book information
+    testApp.Delete book info by id
+    testApp.Validate delete response
